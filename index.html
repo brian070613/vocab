@@ -18,9 +18,9 @@
   --r:16px;
 }
 html.dark{
-    --bg:#111110; --card:#1b1b1a; --text:#f0eee9; --text2:#a3a09a; --text3:#6f6c66;
-    --line:#2c2c2a; --gold:#d9a94e; --gold-dim:#c2953f;
-    --ok:#5cc98a; --ok-bg:#16281d; --bad:#ef8079; --bad-bg:#2a1917;
+  --bg:#111110; --card:#1b1b1a; --text:#f0eee9; --text2:#a3a09a; --text3:#6f6c66;
+  --line:#2c2c2a; --gold:#d9a94e; --gold-dim:#c2953f;
+  --ok:#5cc98a; --ok-bg:#16281d; --bad:#ef8079; --bad-bg:#2a1917;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -38,7 +38,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 .brand{font-weight:700;letter-spacing:.5px}
 .brand small{display:block;font-weight:400;font-size:11px;color:var(--text3);letter-spacing:1.5px}
 .iconbtn{border:none;background:var(--card);color:var(--text2);width:38px;height:38px;border-radius:12px;font-size:16px;box-shadow:var(--shadow);cursor:pointer}
-h2{font-size:15px;margin:0 0 10px;color:var(--text2);font-weight:600;letter-spacing:.3px}
+h2{font-size:13px;margin:0 0 10px;color:var(--text3);font-weight:600;letter-spacing:1.2px;text-transform:uppercase}
 .card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:18px}
 .hero{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
 .stat{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 10px;text-align:center}
@@ -55,7 +55,6 @@ h2{font-size:15px;margin:0 0 10px;color:var(--text2);font-weight:600;letter-spac
 .mode .arrow{margin-left:auto;color:var(--text3);font-size:18px}
 .bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
 .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-dim));width:0;transition:width .3s}
-/* quiz */
 .quiztop{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .quiztop .bar{flex:1}
 .counter{font-size:12px;color:var(--text3);font-variant-numeric:tabular-nums}
@@ -63,7 +62,11 @@ h2{font-size:15px;margin:0 0 10px;color:var(--text2);font-weight:600;letter-spac
 .qlabel{font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;font-weight:600}
 .qtext{font-size:27px;font-weight:650;line-height:1.35;word-break:break-word}
 .qtext.en{font-family:Georgia,"Times New Roman",serif;font-weight:600}
+.qtext.sent{font-family:Georgia,"Times New Roman",serif;font-size:19px;font-weight:500;text-align:left;line-height:1.65}
+.blank{display:inline-block;min-width:64px;border-bottom:2px solid var(--gold);margin:0 3px;color:transparent;user-select:none}
+.filled{color:var(--ok);font-weight:700;border-bottom:2px solid var(--ok)}
 .qhint{font-size:13px;color:var(--text3);font-family:ui-monospace,Menlo,monospace;letter-spacing:1px}
+.qzh{font-size:13.5px;color:var(--text2);text-align:left;border-top:1px dashed var(--line);padding-top:10px;margin-top:4px}
 .opts{display:grid;gap:10px}
 .opt{position:relative;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:15px 44px 15px 16px;
   font-size:16px;text-align:left;color:var(--text);cursor:pointer;transition:all .15s;width:100%;font-family:inherit;
@@ -79,6 +82,7 @@ h2{font-size:15px;margin:0 0 10px;color:var(--text2);font-weight:600;letter-spac
 .feedback.good{background:var(--ok-bg);color:var(--ok)}
 .feedback.wrong{background:var(--bad-bg);color:var(--bad)}
 .feedback b{display:block;font-size:17px;margin-bottom:2px}
+.feedback .fsent{font-family:Georgia,serif;color:var(--text);font-size:14.5px;margin-top:6px;line-height:1.6}
 @keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 .row{display:flex;gap:10px;margin-top:16px}
 .btn{flex:1;border:none;border-radius:14px;padding:15px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;
@@ -93,7 +97,6 @@ input.type.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
 input.type.bad{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
 .speak{border:none;background:transparent;color:var(--gold);font-size:20px;cursor:pointer;padding:4px 8px}
 .mini{font-size:12px;color:var(--text3);text-align:center;margin-top:10px}
-/* list */
 .search{width:100%;border:none;background:var(--card);border-radius:14px;padding:14px 16px;font-size:15px;color:var(--text);
   box-shadow:var(--shadow);outline:none;margin-bottom:14px;font-family:inherit}
 .wrow{display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid var(--line)}
@@ -103,7 +106,6 @@ input.type.bad{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)
 .dot{width:7px;height:7px;border-radius:50%;flex:none;background:var(--line)}
 .dot.b1{background:#e0b86a}.dot.b2{background:#a8c48a}.dot.b3{background:var(--ok)}
 .dot.bad{background:var(--bad)}
-/* nav */
 nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;pointer-events:none;padding-bottom:env(safe-area-inset-bottom)}
 .navbox{pointer-events:auto;display:flex;gap:4px;background:var(--card);border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.13);
   padding:7px;margin-bottom:12px;border:1px solid var(--line)}
@@ -124,21 +126,32 @@ nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;p
     <button class="iconbtn" id="btnTheme" title="切换主题">◐</button>
   </header>
 
-  <!-- HOME -->
   <section id="vHome">
     <div class="hero">
       <div class="stat"><b id="sTotal">0</b><span>总词数</span></div>
       <div class="stat"><b id="sMastered">0</b><span>已掌握</span></div>
       <div class="stat"><b id="sWrong">0</b><span>错题待复习</span></div>
     </div>
-    <h2>开始练习</h2>
+
+    <h2>单词</h2>
     <div class="modes">
       <button class="mode" data-start="mix"><span class="em">🎯</span><span><b>混合闯关</b><i>中译英 + 英译中 + 拼写，20 题一轮</i></span><span class="arrow">›</span></button>
       <button class="mode" data-start="cn2en"><span class="em">🇨🇳</span><span><b>中译英 · 选择题</b><i>看中文，选英文</i></span><span class="arrow">›</span></button>
       <button class="mode" data-start="en2cn"><span class="em">🇬🇧</span><span><b>英译中 · 选择题</b><i>看英文，选含义</i></span><span class="arrow">›</span></button>
       <button class="mode" data-start="spell"><span class="em">⌨️</span><span><b>拼写挑战</b><i>看中文，把英文敲出来</i></span><span class="arrow">›</span></button>
-      <button class="mode" data-start="wrong"><span class="em">🔁</span><span><b>错题重练</b><i id="wrongSub">复习做错过的词</i></span><span class="arrow">›</span></button>
     </div>
+
+    <h2>句子挖空 <span class="pill" id="clozeCount">478 句</span></h2>
+    <div class="modes">
+      <button class="mode" data-start="cloze"><span class="em">🧩</span><span><b>挖空 · 填空</b><i>看句子和中文，把缺的词写出来</i></span><span class="arrow">›</span></button>
+      <button class="mode" data-start="clozeC"><span class="em">📝</span><span><b>挖空 · 选择</b><i>四选一，语感更快</i></span><span class="arrow">›</span></button>
+    </div>
+
+    <h2>复习</h2>
+    <div class="modes">
+      <button class="mode" data-start="wrong"><span class="em">🔁</span><span><b>错题重练</b><i id="wrongSub">复习做错过的单词和句子</i></span><span class="arrow">›</span></button>
+    </div>
+
     <h2>今日</h2>
     <div class="card" style="margin-bottom:20px">
       <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:8px">
@@ -149,7 +162,6 @@ nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;p
     </div>
   </section>
 
-  <!-- QUIZ -->
   <section id="vQuiz" class="hidden">
     <div class="quiztop">
       <button class="iconbtn" id="btnQuit" title="结束">✕</button>
@@ -160,6 +172,7 @@ nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;p
       <div class="qlabel" id="qLabel">中译英</div>
       <div class="qtext" id="qText">—</div>
       <div class="qhint" id="qHint"></div>
+      <div class="qzh hidden" id="qZh"></div>
       <div id="qSpeakWrap"></div>
     </div>
     <div class="opts" id="qOpts"></div>
@@ -175,11 +188,10 @@ nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;p
     <div class="row"><button class="btn ghost" id="btnSkip">跳过</button></div>
   </section>
 
-  <!-- DONE -->
   <section id="vDone" class="hidden center">
     <div class="card" style="margin-top:30px">
       <div class="big" id="doneEmoji">🎉</div>
-      <h2 style="font-size:20px;color:var(--text);margin-bottom:6px" id="doneTitle">这一轮完成</h2>
+      <h2 style="font-size:20px;color:var(--text);margin-bottom:6px;text-transform:none;letter-spacing:0" id="doneTitle">这一轮完成</h2>
       <p class="sub" id="doneText">—</p>
       <div class="hero" style="margin:18px 0 4px">
         <div class="stat" style="box-shadow:none;background:var(--bg)"><b id="dOk">0</b><span>答对</span></div>
@@ -194,7 +206,6 @@ nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;p
     </div>
   </section>
 
-  <!-- LIST -->
   <section id="vList" class="hidden">
     <input class="search" id="searchBox" placeholder="搜索中文或英文…">
     <div id="wordList"></div>
@@ -208,7 +219,8 @@ nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;p
 
 <script>
 const WORDS = [{"id":0,"cn":"外来务工者","en":"emigrant workers","pos":""},{"id":1,"cn":"候鸟迁徙路线","en":"the migration of migratory bird","pos":""},{"id":2,"cn":"北斗卫星导航系统","en":"The Beidou Satellite Navigation System","pos":""},{"id":3,"cn":"珠江三角洲","en":"The Pearl River Delta","pos":""},{"id":4,"cn":"海上丝绸之路","en":"The Maritime Silk Road","pos":""},{"id":5,"cn":"孔夫子","en":"Confucius","pos":""},{"id":6,"cn":"改革开放","en":"The Reform and Opening-up","pos":""},{"id":7,"cn":"中国特色社会主义道路","en":"the socialist path with Chinese charateristics","pos":""},{"id":8,"cn":"脱贫攻坚","en":"poverty alleviation","pos":""},{"id":9,"cn":"巧妇难为无米之炊","en":"It is impossible for a professional cook to make a meal without rice","pos":""},{"id":10,"cn":"梅花","en":"plum blossom","pos":""},{"id":11,"cn":"牡丹","en":"peony","pos":""},{"id":12,"cn":"少数民族","en":"ethic group","pos":""},{"id":13,"cn":"命名","en":"designate","pos":""},{"id":14,"cn":"从外部迁入的移民","en":"immigrant","pos":""},{"id":15,"cn":"从内部迁出的移民","en":"emigrant","pos":""},{"id":16,"cn":"进口汽车","en":"foreign-made automobiles/vehicles","pos":""},{"id":17,"cn":"进口的","en":"internationally-produced","pos":""},{"id":18,"cn":"农业现代化","en":"agriculture modernization","pos":""},{"id":19,"cn":"医疗保健","en":"medical healthcare","pos":""},{"id":20,"cn":"巨大的","en":"tremendous","pos":""},{"id":21,"cn":"中国四大名著","en":"Four Great Classical Novel of China","pos":""},{"id":22,"cn":"水浒传","en":"The Water Margin","pos":""},{"id":23,"cn":"红楼梦","en":"A Dream of Red Mansion","pos":""},{"id":24,"cn":"三国演义","en":"The Romance of Three Kingdoms","pos":""},{"id":25,"cn":"名人","en":"celebrity","pos":""},{"id":26,"cn":"怪异的","en":"weird","pos":""},{"id":27,"cn":"回报","en":"reward","pos":""},{"id":28,"cn":"奖励","en":"award","pos":""},{"id":29,"cn":"储存","en":"storage","pos":"n"},{"id":30,"cn":"稀有","en":"rarity","pos":"n"},{"id":31,"cn":"董事会","en":"board","pos":""},{"id":32,"cn":"珍贵的","en":"Precisely","pos":""},{"id":33,"cn":"人类","en":"Human being","pos":""},{"id":34,"cn":"刷","en":"Swipe","pos":""},{"id":35,"cn":"松树","en":"pine tree","pos":""},{"id":36,"cn":"建筑工地","en":"construction site","pos":""},{"id":37,"cn":"浪漫化","en":"romanticize","pos":""},{"id":38,"cn":"戏剧化","en":"dramatize","pos":""},{"id":39,"cn":"不同程度上","en":"to different extents","pos":""},{"id":40,"cn":"洞庭湖西岸","en":"the western shore of Dongting lake","pos":""},{"id":41,"cn":"成语","en":"Chinese idiom","pos":""},{"id":42,"cn":"园林","en":"Chinese garden","pos":""},{"id":43,"cn":"黄土高原","en":"The Loess Plateau","pos":""},{"id":44,"cn":"盆地","en":"basin","pos":""},{"id":45,"cn":"乡村振兴战略","en":"Rural revitalization strategy","pos":""},{"id":46,"cn":"值得的","en":"worthwhile","pos":""},{"id":47,"cn":"尸体","en":"dead body","pos":""},{"id":48,"cn":"爱国的","en":"patriotic","pos":""},{"id":49,"cn":"严酷的","en":"severe","pos":""},{"id":50,"cn":"淡水湖","en":"fresh water lake","pos":""},{"id":51,"cn":"续航能力","en":"battery capacity","pos":""},{"id":52,"cn":"客运能力","en":"passenger capacity","pos":""},{"id":53,"cn":"濒危物种","en":"endangered species","pos":""},{"id":54,"cn":"可持续发展","en":"sustainable development","pos":""},{"id":55,"cn":"草地覆盖率","en":"grass coverage rate","pos":""},{"id":56,"cn":"数学很重要","en":"math is of great consequence","pos":""},{"id":57,"cn":"中外建筑师长期合作的结果","en":"the result of long-term cooperation between foreign and Chinese architects","pos":""},{"id":58,"cn":"合作","en":"cooperation","pos":""},{"id":59,"cn":"建筑师","en":"architect","pos":""},{"id":60,"cn":"令人烦躁的","en":"annoying","pos":""},{"id":61,"cn":"垃圾桶","en":"bin","pos":""},{"id":62,"cn":"电影脚本","en":"movie script","pos":""},{"id":63,"cn":"打扰","en":"bother","pos":"v"},{"id":64,"cn":"守旧的","en":"old-school","pos":""},{"id":65,"cn":"使受伤（战斗中）","en":"wound","pos":""},{"id":66,"cn":"士兵在战斗中负伤","en":"The soldier was wounded in the battle","pos":""},{"id":67,"cn":"在二十一世纪上半叶","en":"at the first half of 21st century","pos":""},{"id":68,"cn":"强烈（竞争激烈，野兽凶猛）","en":"fierce","pos":""},{"id":69,"cn":"他恶狠狠的瞪了我一眼","en":"He gave me a fierce look","pos":""},{"id":70,"cn":"强烈的","en":"intense","pos":""},{"id":71,"cn":"暴力的","en":"violent","pos":""},{"id":72,"cn":"...种类繁多","en":"There are a large variety of","pos":""},{"id":73,"cn":"精美的","en":"delicate","pos":""},{"id":74,"cn":"扇子曾是中国女人的最爱","en":"Fans used to be a favorite item of Chinese women","pos":""},{"id":75,"cn":"上海的女子几乎人手一把扇子","en":"almost each women of Shanghai has a fan in their hand","pos":""},{"id":76,"cn":"扇子或许是女人用来表现优雅的最好道具","en":"Fans are probably the most appropriate expression of women’s elegance","pos":""},{"id":77,"cn":"由。。。组成","en":"consist of","pos":""},{"id":78,"cn":"自然景色","en":"Natural scenery","pos":""},{"id":79,"cn":"旅游业","en":"tourism","pos":""},{"id":80,"cn":"中秋节","en":"Mid-Autumn Festival","pos":""},{"id":81,"cn":"元宵节","en":"Lantern Festival","pos":""},{"id":82,"cn":"奇异的","en":"exotic","pos":""},{"id":83,"cn":"流动","en":"flow","pos":""},{"id":84,"cn":"肌肉","en":"muscle","pos":""},{"id":85,"cn":"美食的，美食家","en":"gourmet","pos":""},{"id":86,"cn":"大概的，近似的","en":"approximate","pos":""},{"id":87,"cn":"超过V","en":"exceed","pos":""},{"id":88,"cn":"转移,转化","en":"shift","pos":""},{"id":89,"cn":"过滤，过滤器","en":"filter","pos":""},{"id":90,"cn":"隐私","en":"privacy","pos":""},{"id":91,"cn":"神经的","en":"neural","pos":""},{"id":92,"cn":"神经元","en":"neuron","pos":""},{"id":93,"cn":"主食","en":"staple","pos":""},{"id":94,"cn":"邮票","en":"stamp","pos":""},{"id":95,"cn":"加工食物","en":"processed food","pos":""},{"id":96,"cn":"完全没有，缺乏的","en":"be devoid of sth","pos":""},{"id":97,"cn":"运用，施加","en":"exert","pos":"v"},{"id":98,"cn":"适中的，不太多的","en":"modest","pos":""},{"id":99,"cn":"总称","en":"generic name","pos":""},{"id":100,"cn":"承担","en":"undertake","pos":""},{"id":101,"cn":"倡议，主动性","en":"initiative","pos":""},{"id":102,"cn":"家具","en":"furniture","pos":""},{"id":103,"cn":"致命的","en":"fatal","pos":""},{"id":104,"cn":"山崩","en":"landslide","pos":""},{"id":105,"cn":"得罪，冒犯V","en":"offend","pos":""},{"id":106,"cn":"防御","en":"defend","pos":""},{"id":107,"cn":"框架","en":"framework","pos":""},{"id":108,"cn":"高贵的高尚的","en":"noble","pos":""},{"id":109,"cn":"秘书","en":"secretary","pos":""},{"id":110,"cn":"保持一切井井有条","en":"keep everything in good order","pos":""},{"id":111,"cn":"脚踝","en":"ankle","pos":""},{"id":112,"cn":"腰","en":"waist","pos":""},{"id":113,"cn":"按数字顺序","en":"in numerical order","pos":""},{"id":114,"cn":"机密的","en":"confidential","pos":""},{"id":115,"cn":"认为，=regard/consider","en":"deem","pos":""},{"id":116,"cn":"规章制度","en":"regulation","pos":""},{"id":117,"cn":"占支配地位的","en":"dominant","pos":""},{"id":118,"cn":"条件，情况","en":"circumstance","pos":""},{"id":119,"cn":"衰退","en":"recession","pos":"n"},{"id":120,"cn":"管理的","en":"regulatory","pos":""},{"id":121,"cn":"利润","en":"profit","pos":""},{"id":122,"cn":"政权","en":"regime","pos":"n"},{"id":123,"cn":"损失","en":"losses","pos":"n"},{"id":124,"cn":"抹去","en":"erase","pos":""},{"id":125,"cn":"破产的","en":"bankrupt","pos":""},{"id":126,"cn":"泄漏","en":"leak","pos":""},{"id":127,"cn":"货物","en":"cargo","pos":""},{"id":128,"cn":"市长（英格兰地区使用）","en":"mayor","pos":""},{"id":129,"cn":"冰箱","en":"refrigerator","pos":""},{"id":130,"cn":"打折","en":"discount","pos":""},{"id":131,"cn":"陡峭的","en":"steep","pos":""},{"id":132,"cn":"股票","en":"stock","pos":""},{"id":133,"cn":"现实主义","en":"realism","pos":""},{"id":134,"cn":"交通拥堵","en":"traffic congestion","pos":""},{"id":135,"cn":"目标","en":"objective","pos":"n"},{"id":136,"cn":"仓库","en":"warehouse","pos":""},{"id":137,"cn":"丢弃","en":"discard","pos":""},{"id":138,"cn":"暂停，终止","en":"suspend","pos":""},{"id":139,"cn":"宗教的","en":"religious","pos":""},{"id":140,"cn":"烟花","en":"firework","pos":""},{"id":141,"cn":"手续","en":"procedure","pos":""},{"id":142,"cn":"把握，抓紧","en":"grasp","pos":""},{"id":143,"cn":"教练教官","en":"instructor","pos":""},{"id":144,"cn":"概念","en":"concept","pos":""},{"id":145,"cn":"掉队","en":"lag","pos":""},{"id":146,"cn":"物理学","en":"physics","pos":""},{"id":147,"cn":"故意的","en":"deliberate","pos":""},{"id":148,"cn":"使迷惑","en":"puzzle","pos":""},{"id":149,"cn":"苦思冥想","en":"puzzle out","pos":""},{"id":150,"cn":"讲座","en":"lecture","pos":""},{"id":151,"cn":"采矿，采矿业","en":"mining","pos":""},{"id":152,"cn":"逮捕","en":"arrest","pos":""},{"id":153,"cn":"埋葬","en":"bury","pos":""},{"id":154,"cn":"炉子","en":"stove","pos":""},{"id":155,"cn":"基础设施","en":"infrastructure","pos":""},{"id":156,"cn":"短语","en":"phrase","pos":""},{"id":157,"cn":"十分震惊的","en":"astonished","pos":""},{"id":158,"cn":"分界线，边界","en":"boundary","pos":""},{"id":159,"cn":"监狱","en":"prison","pos":""},{"id":160,"cn":"隔离V.","en":"isolate","pos":""},{"id":161,"cn":"判决，宣判V.","en":"sentence","pos":""},{"id":162,"cn":"把...分类","en":"classify","pos":""},{"id":163,"cn":"履行V","en":"fulfill","pos":""},{"id":164,"cn":"注册","en":"enroll","pos":"v"},{"id":165,"cn":"有资格去做","en":"qualify","pos":"v"},{"id":166,"cn":"充足的","en":"sufficient","pos":""},{"id":167,"cn":"授予V","en":"grant","pos":""},{"id":168,"cn":"使处于不利地位","en":"disadvantage","pos":""},{"id":169,"cn":"存款","en":"deposit","pos":""},{"id":170,"cn":"押金","en":"security deposit","pos":""},{"id":171,"cn":"矿物质","en":"mineral","pos":""},{"id":172,"cn":"大量消耗","en":"deplete","pos":""},{"id":173,"cn":"真空的","en":"vacuum","pos":""},{"id":174,"cn":"显示，表明","en":"manifest","pos":""},{"id":175,"cn":"含义","en":"implication","pos":""},{"id":176,"cn":"版本","en":"version","pos":""},{"id":177,"cn":"违约","en":"default","pos":""},{"id":178,"cn":"专利","en":"patent","pos":""},{"id":179,"cn":"完整性","en":"integrity","pos":""},{"id":180,"cn":"逐渐削弱（慢慢侵蚀）","en":"undermine","pos":""},{"id":181,"cn":"规范，准则","en":"norm","pos":"n"},{"id":182,"cn":"抑制","en":"inhibit","pos":"v"},{"id":183,"cn":"放弃，错过（机会）","en":"pass up","pos":""},{"id":184,"cn":"对...失去理智","en":"get carried away with sth","pos":""},{"id":185,"cn":"刺激，激励","en":"incentive","pos":"n"},{"id":186,"cn":"在....范围内","en":"within","pos":""},{"id":187,"cn":"重新开始，恢复","en":"resume","pos":""},{"id":188,"cn":"候选人","en":"candidate","pos":""},{"id":189,"cn":"有说服力的","en":"persuasive","pos":""},{"id":190,"cn":"魅力","en":"charm","pos":""},{"id":191,"cn":"大量","en":"array","pos":"n"},{"id":192,"cn":"申请人","en":"applicant","pos":""},{"id":193,"cn":"溺爱","en":"spoil","pos":""},{"id":194,"cn":"辞职","en":"resign","pos":""},{"id":195,"cn":"揭露","en":"uncover","pos":""},{"id":196,"cn":"招募","en":"recruit","pos":""},{"id":197,"cn":"生效","en":"come into effect","pos":""},{"id":198,"cn":"运输","en":"shipment","pos":"n"},{"id":199,"cn":"裁判","en":"referee","pos":"n"},{"id":200,"cn":"空的，中空的","en":"hollow","pos":""},{"id":201,"cn":"蚊子","en":"mosquito","pos":""},{"id":202,"cn":"野兽","en":"beast","pos":""},{"id":203,"cn":"领先，在前面","en":"ahead","pos":""},{"id":204,"cn":"队列","en":"queue","pos":""},{"id":205,"cn":"耐用的，持久的","en":"durable","pos":""},{"id":206,"cn":"精密的，复杂的（机器）","en":"sophisticate","pos":""},{"id":207,"cn":"冗长乏味的","en":"tedious","pos":""},{"id":208,"cn":"投资","en":"investment","pos":"n"},{"id":209,"cn":"出台","en":"implement","pos":"v"},{"id":210,"cn":"稳步地，平稳地","en":"steadily","pos":""},{"id":211,"cn":"重视","en":"attach importance to","pos":"v"},{"id":212,"cn":"易于...的，有...倾向的","en":"be prone to","pos":""},{"id":213,"cn":"大量的，许多的","en":"a host of","pos":""},{"id":214,"cn":"令人讨厌的，糟糕的","en":"nasty","pos":""},{"id":215,"cn":"倾向于做某事","en":"be inclined to","pos":""},{"id":216,"cn":"英雄的，英勇的","en":"heroic","pos":""},{"id":217,"cn":"缄默的，沉默的，哑的","en":"mute","pos":""},{"id":218,"cn":"无法被言语形容的","en":"unspeakably","pos":""},{"id":219,"cn":"毛毛虫","en":"caterpillar","pos":""},{"id":220,"cn":"勉强的，不情愿的","en":"grudgingly","pos":""},{"id":221,"cn":"内向的人","en":"introvert","pos":""},{"id":222,"cn":"外向的人","en":"extrovert","pos":""},{"id":223,"cn":"无礼的，冒犯的","en":"offensive","pos":""},{"id":224,"cn":"次的，较差的","en":"inferior","pos":""},{"id":225,"cn":"竞争对手","en":"rival","pos":""},{"id":226,"cn":"可观的","en":"considerable","pos":""},{"id":227,"cn":"深深的根植于","en":"be deeply rooted","pos":""},{"id":228,"cn":"促进","en":"promote/boost","pos":""},{"id":229,"cn":"生态环境","en":"ecological environment","pos":""},{"id":230,"cn":"珍贵的","en":"precious","pos":""},{"id":231,"cn":"年轻人","en":"youngster","pos":""},{"id":232,"cn":"地道的当地特色小吃","en":"authentic local distinctive snack","pos":""},{"id":233,"cn":"近海的，沿海的","en":"coastal","pos":""},{"id":234,"cn":"虾，小虾","en":"shrimp","pos":""},{"id":235,"cn":"边界，边境","en":"border","pos":""},{"id":236,"cn":"预测","en":"forecast","pos":"v"},{"id":237,"cn":"重要性","en":"magnitude","pos":""},{"id":238,"cn":"社会学家","en":"sociologist","pos":""},{"id":239,"cn":"一块土地","en":"a plot of land","pos":""},{"id":240,"cn":"紧张的，使紧张","en":"tense","pos":""},{"id":241,"cn":"伸展，拉长","en":"stretch","pos":""},{"id":242,"cn":"显著的，杰出的","en":"prominent","pos":""},{"id":243,"cn":"包含，由...组成","en":"comprise","pos":""},{"id":244,"cn":"烹饪的","en":"culinary","pos":""},{"id":245,"cn":"蜗牛","en":"snail","pos":""},{"id":246,"cn":"一份（食物）","en":"serving","pos":""},{"id":247,"cn":"腐烂的","en":"rotten","pos":""},{"id":248,"cn":"质地粗糙的","en":"rough-textured","pos":""},{"id":249,"cn":"以什么为导向的","en":"oriented","pos":""},{"id":250,"cn":"目标导向的","en":"goal-oriented","pos":""},{"id":251,"cn":"断言，证实","en":"affirm","pos":""},{"id":252,"cn":"重申承诺","en":"affirm one’s commitment","pos":""},{"id":253,"cn":"复杂精细的","en":"intricately","pos":""},{"id":254,"cn":"白话文，散文","en":"prose","pos":""},{"id":255,"cn":"白话文写作","en":"prose writing","pos":""},{"id":256,"cn":"流畅","en":"fluency","pos":"n"},{"id":257,"cn":"精通使用英语","en":"be fluent in English","pos":""},{"id":258,"cn":"使沉浸，浸入","en":"immerse oneself in sth./be immersed in sth","pos":""},{"id":259,"cn":"耐力，持久力","en":"endurance","pos":""},{"id":260,"cn":"耐力运动","en":"endurance sport","pos":""},{"id":261,"cn":"根本上地","en":"fundamentally","pos":""},{"id":262,"cn":"极其重要的（从根本上重要的）","en":"fundamentally important","pos":""},{"id":263,"cn":"断断续续的，结结巴巴的","en":"halting","pos":""},{"id":264,"cn":"结结巴巴的演讲","en":"halting speech","pos":""},{"id":265,"cn":"媒介","en":"intermediary","pos":""},{"id":266,"cn":"内在的，固有的","en":"inherent in sth","pos":""},{"id":267,"cn":"指定","en":"specify","pos":"v"},{"id":268,"cn":"石头板","en":"stone plate","pos":""},{"id":269,"cn":"手工艺术人","en":"craftsman","pos":""},{"id":270,"cn":"图案，模式","en":"pattern","pos":""},{"id":271,"cn":"人物","en":"figure","pos":""},{"id":272,"cn":"在现场，当场","en":"on the spot","pos":""},{"id":273,"cn":"在...之中深受欢迎","en":"deeply popular among","pos":""},{"id":274,"cn":"大众","en":"public","pos":""},{"id":275,"cn":"讲授，教导，指导","en":"instruction","pos":"n"},{"id":276,"cn":"陈述，说明","en":"state","pos":"v"},{"id":277,"cn":"有道理，说的通","en":"make sense","pos":""},{"id":278,"cn":"与此同时","en":"meanwhile","pos":""},{"id":279,"cn":"面对","en":"confront","pos":"v"},{"id":280,"cn":"热心的，热情的，积极的","en":"zealous","pos":""},{"id":281,"cn":"费用，代价","en":"expense","pos":""},{"id":282,"cn":"劝告","en":"counsel","pos":"v"},{"id":283,"cn":"顾问","en":"counselor","pos":""},{"id":284,"cn":"建议某人做某事","en":"counsel sb. to do sth","pos":""},{"id":285,"cn":"使震惊","en":"stun","pos":"v"},{"id":286,"cn":"被某事震惊","en":"be stunned by sth","pos":""},{"id":287,"cn":"令人信服的，有说服力的","en":"compelling","pos":""},{"id":288,"cn":"确凿有力的证据","en":"compelling evidence","pos":""},{"id":289,"cn":"满足感","en":"fulfillment","pos":""},{"id":290,"cn":"使（不好的事物）持续下去","en":"perpetuate","pos":""},{"id":291,"cn":"广泛的","en":"broad","pos":""},{"id":292,"cn":"使平等","en":"level","pos":""},{"id":293,"cn":"竞技舞台","en":"playing field","pos":""},{"id":294,"cn":"候选人（尤其指有抱负的）","en":"aspirant","pos":""},{"id":295,"cn":"卓越的，杰出的","en":"exceptional","pos":""},{"id":296,"cn":"全套技能","en":"repertoire","pos":""},{"id":297,"cn":"...的基石","en":"the corner stone of","pos":""},{"id":298,"cn":"进化","en":"evolution","pos":""},{"id":299,"cn":"进化的","en":"evolutionary","pos":""},{"id":300,"cn":"子女，后代","en":"offspring","pos":""},{"id":301,"cn":"假设，假说","en":"hypothesis","pos":""},{"id":302,"cn":"灵长类物种","en":"primate-species","pos":""},{"id":303,"cn":"厨师","en":"chef","pos":""},{"id":304,"cn":"谋杀，谋杀案","en":"murder","pos":""},{"id":305,"cn":"谋杀案","en":"a murder case","pos":""},{"id":306,"cn":"使困惑","en":"baffle","pos":""},{"id":307,"cn":"适度的","en":"moderate","pos":""},{"id":308,"cn":"大胆提出","en":"venture","pos":""},{"id":309,"cn":"V.融化","en":"melt","pos":""},{"id":310,"cn":"美味佳肴","en":"delicacy","pos":""},{"id":311,"cn":"赞助V","en":"sponsor","pos":""},{"id":312,"cn":"进入权","en":"admission","pos":"n"},{"id":313,"cn":"赞助一项活动","en":"sponsor an event","pos":""},{"id":314,"cn":"慌乱的","en":"frantic","pos":""},{"id":315,"cn":"慌乱的寻找","en":"frantic search","pos":""},{"id":316,"cn":"不可避免的","en":"inevitable","pos":""},{"id":317,"cn":"必然结果","en":"inevitable result","pos":""},{"id":318,"cn":"恐惧","en":"horror","pos":"n"},{"id":319,"cn":"恐惧地","en":"in horror","pos":""},{"id":320,"cn":"至关重要的","en":"crucial","pos":""},{"id":321,"cn":"悖论","en":"paradox","pos":"n"},{"id":322,"cn":"透露","en":"disclose","pos":"v"},{"id":323,"cn":"奢华的","en":"lavish","pos":""},{"id":324,"cn":"把...慷慨倾注于","en":"lavish sth. on","pos":""},{"id":325,"cn":"空的","en":"vacant","pos":""},{"id":326,"cn":"职务空缺","en":"job vacancy","pos":""},{"id":327,"cn":"离职率","en":"turnover","pos":""},{"id":328,"cn":"门槛","en":"threshold","pos":""},{"id":329,"cn":"延长","en":"prolong","pos":"v"},{"id":330,"cn":"抑制","en":"curb","pos":"v"},{"id":331,"cn":"毁坏","en":"ruin","pos":"v"},{"id":332,"cn":"香料","en":"spice","pos":"n"},{"id":333,"cn":"瓷器","en":"china","pos":""},{"id":334,"cn":"宝石","en":"gem","pos":""},{"id":335,"cn":"见证，目睹","en":"witness","pos":"n"},{"id":336,"cn":"第一人称视角","en":"first-person point of view","pos":""},{"id":337,"cn":"前景","en":"prospect","pos":""},{"id":338,"cn":"相互抵消","en":"cancel out","pos":""},{"id":339,"cn":"预期","en":"anticipate","pos":"v"},{"id":340,"cn":"使。。。能够","en":"enable","pos":""},{"id":341,"cn":"普及","en":"popularize","pos":"v"},{"id":342,"cn":"老人","en":"seniors","pos":"n"},{"id":343,"cn":"品种","en":"variety","pos":"n"},{"id":344,"cn":"普及","en":"popularization","pos":"n"},{"id":345,"cn":"浏览","en":"browse","pos":"v"},{"id":346,"cn":"越来越多的","en":"an increasing number of","pos":""},{"id":347,"cn":"齐全的","en":"complete","pos":"adj"},{"id":348,"cn":"资金安全","en":"financial security","pos":""},{"id":349,"cn":"就...而言","en":"as far as sb./sth. is concerned","pos":""},{"id":350,"cn":"洋葱","en":"onion","pos":"n"},{"id":351,"cn":"确实","en":"indeed","pos":"adv"},{"id":352,"cn":"骨折，使断裂","en":"fracture","pos":""},{"id":353,"cn":"片刻地","en":"momentarily","pos":""},{"id":354,"cn":"手工的","en":"manual","pos":""},{"id":355,"cn":"复制品","en":"duplicate","pos":""},{"id":356,"cn":"传记","en":"biography","pos":""},{"id":357,"cn":"几乎","en":"virtually","pos":"adv"},{"id":358,"cn":"生态学家","en":"ecologist","pos":""},{"id":359,"cn":"节约，保护","en":"conserve","pos":""},{"id":360,"cn":"生物多样性","en":"biodiversity","pos":""},{"id":361,"cn":"差别","en":"distinction","pos":"n"},{"id":362,"cn":"直白地","en":"explicitly","pos":""},{"id":363,"cn":"使分心","en":"distract","pos":""},{"id":364,"cn":"干扰，使人分心的东西","en":"distraction","pos":""},{"id":365,"cn":"倾向，意愿","en":"inclination","pos":"n"},{"id":366,"cn":"随心所欲","en":"follow one’s own inclination","pos":""},{"id":367,"cn":"更好的","en":"superior","pos":""},{"id":368,"cn":"虚拟的","en":"virtual","pos":""},{"id":369,"cn":"视觉的","en":"visual","pos":""},{"id":370,"cn":"极其地","en":"exceedingly","pos":"adv"},{"id":371,"cn":"随机的","en":"random","pos":""},{"id":372,"cn":"高原","en":"Plateau","pos":""}];
-const ROUND = 20;
+const CLOZE = [{"id":0,"s":"She finally defeated her main ______ to win the championship.","zh":"她最终击败了主要的竞争对手，赢得了冠军。","a":"rival","cn":"竞争对手"},{"id":1,"s":"We should ______ the quality of our products rather than their quantity.","zh":"我们应该重视产品的质量，而不是数量。","a":"attach importance to","cn":"重视"},{"id":2,"s":"Hua she tian zu is a well-known ______.","zh":"“画蛇添足”是一个著名的成语。","a":"Chinese idiom","cn":"成语"},{"id":3,"s":"______ is a time for family reunion in China.","zh":"在中国，中秋节是家人团聚的时刻。","a":"the Mid-Autumn Festival","cn":"中秋节"},{"id":4,"s":"The human brain contains billions of ______.","zh":"人脑包含数十亿个神经元。","a":"neuron","cn":"神经元"},{"id":5,"s":"Each ______ has its own language, customs and festivals.","zh":"每个少数民族都有自己的语言、习俗和节日。","a":"ethnic group","cn":"少数民族"},{"id":6,"s":"Her fear of failure ______ in a childhood full of harsh criticism.","zh":"她对失败的恐惧深深根植于一个充满严厉批评的童年。","a":"be deeply rooted","cn":"深深的根植于"},{"id":7,"s":"The goods are stored in a large ______.","zh":"货物存放在一个大仓库里。","a":"warehouse","cn":"仓库"},{"id":8,"s":"The government has introduced new policies to protect the rights of ______.","zh":"政府出台了新政策来保护外来务工者的权益。","a":"emigrant workers","cn":"外来务工者"},{"id":9,"s":"She wore a dress with ______ embroidery.","zh":"她穿着一件带有精美刺绣的连衣裙。","a":"delicate","cn":"精美的"},{"id":10,"s":"You must finish the test ______ one hour.","zh":"你必须在一小时内完成考试。","a":"within","cn":"在……范围内"},{"id":11,"s":"The view from the mountain top was ______ beautiful.","zh":"山顶的景色美得无法形容。","a":"unspeakably","cn":"无法被言语形容的"},{"id":12,"s":"The shop offers a wide ______ of products.","zh":"这家商店提供大量琳琅满目的商品。","a":"array","cn":"大量"},{"id":13,"s":"The garden is full of ______ flowers from tropical countries.","zh":"花园里开满了来自热带国家的奇异花卉。","a":"exotic","cn":"奇异的"},{"id":14,"s":"Please arrange the files ______.","zh":"请把文件按数字顺序排列。","a":"in numerical order","cn":"按数字顺序"},{"id":15,"s":"The government launched a series of programs aimed at ______.","zh":"政府启动了一系列旨在脱贫攻坚的项目。","a":"poverty alleviation","cn":"脱贫攻坚"},{"id":16,"s":"Under no ______ should you give up.","zh":"在任何情况下你都不应放弃。","a":"circumstance","cn":"条件，情况"},{"id":17,"s":"Newspapers often ______ small events to attract readers.","zh":"报纸常把小事件戏剧化以吸引读者。","a":"dramatize","cn":"戏剧化"},{"id":18,"s":"Every ______ carries a lesson or a story behind it.","zh":"每个成语背后都蕴含着一个道理或故事。","a":"Chinese idiom","cn":"成语"},{"id":19,"s":"The job of a salesperson often suits an ______ who enjoys meeting new people.","zh":"销售员这份工作往往适合喜欢结识新人的外向的人。","a":"extrovert","cn":"外向的人"},{"id":20,"s":"Visitors can enjoy an ______ at the food stalls along this ancient street.","zh":"游客可以在这条古街的摊位品尝到地道的当地特色小吃。","a":"authentic local distinctive snack","cn":"地道的当地特色小吃"},{"id":21,"s":"The meeting turned into a ______ discussion about minor details.","zh":"会议变成了一场关于细枝末节的冗长乏味的讨论。","a":"tedious","cn":"冗长乏味的"},{"id":22,"s":"Regular exercise can greatly ______ both physical and mental health.","zh":"经常锻炼能极大地促进身心健康。","a":"promote / boost","cn":"促进"},{"id":23,"s":"The swimming ______ was very patient with beginners.","zh":"那位游泳教练对初学者很有耐心。","a":"instructor","cn":"教练；教官"},{"id":24,"s":"Many ______ today spend more time on their phones than talking to their families.","zh":"如今许多年轻人花在手机上的时间比和家人交谈还多。","a":"youngster","cn":"年轻人"},{"id":25,"s":"The two countries finally reached a ______ peace agreement after long negotiations.","zh":"经过漫长的谈判，两国终于达成了一项持久的和平协议。","a":"durable","cn":"耐用的，持久的"},{"id":26,"s":"He tried to ______ how the machine worked.","zh":"他努力苦思冥想搞清这台机器是如何运转的。","a":"puzzle out","cn":"苦思冥想"},{"id":27,"s":"All the ______ in the house is made of wood.","zh":"房子里所有的家具都是木制的。","a":"furniture","cn":"家具"},{"id":28,"s":"Each ______ sends signals to other cells in the brain.","zh":"每个神经元都会向大脑中的其他细胞发送信号。","a":"neuron","cn":"神经元"},{"id":29,"s":"The small ______ town depends heavily on fishing and tourism.","zh":"这个小小的沿海城镇严重依赖渔业和旅游业。","a":"coastal","cn":"近海的，沿海的"},{"id":30,"s":"Poyang Lake is the largest ______ in China.","zh":"鄱阳湖是中国最大的淡水湖。","a":"freshwater lake","cn":"淡水湖"},{"id":31,"s":"She was praised for her ______ struggle against a serious illness.","zh":"她因与重病进行英勇的抗争而受到赞扬。","a":"heroic","cn":"英雄的，英勇的"},{"id":32,"s":"He took the ______ to organize the charity event.","zh":"他主动发起组织了这次慈善活动。","a":"initiative","cn":"倡议；主动性"},{"id":33,"s":"She tied a belt around her ______.","zh":"她在腰间系了一条腰带。","a":"waist","cn":"腰"},{"id":34,"s":"A good assistant always ______.","zh":"一个好的助理总是把一切保持得井井有条。","a":"keep everything in good order","cn":"保持一切井井有条"},{"id":35,"s":"This landmark was ______ over more than ten years.","zh":"这座地标建筑是中外建筑师十多年长期合作的成果。","a":"the result of long-term cooperation between foreign and Chinese architects","cn":"中外建筑师长期合作的结果"},{"id":36,"s":"She managed to ______ the answer in the end.","zh":"她最终苦思冥想找出了答案。","a":"puzzle out","cn":"苦思冥想"},{"id":37,"s":"The ______ argued that poverty is caused by social structures rather than individual laziness.","zh":"这位社会学家认为，贫困是由社会结构造成的，而非个人懒惰。","a":"sociologist","cn":"社会学家"},{"id":38,"s":"Lack of experience can ______ young workers.","zh":"缺乏经验会使年轻工人处于不利地位。","a":"disadvantage","cn":"使处于不利地位"},{"id":39,"s":"Nothing can ______ the memory of that day.","zh":"没有什么能抹去那一天的记忆。","a":"erase","cn":"抹去"},{"id":40,"s":"Scientists ______ plants into different groups.","zh":"科学家们把植物分类到不同的类别。","a":"classify","cn":"把……分类"},{"id":41,"s":"Can you give me an ______ figure for the total?","zh":"你能给我一个总数的大概数字吗？","a":"approximate","cn":"大概的；近似的"},{"id":42,"s":"The weather ______ says it will rain heavily tomorrow afternoon.","zh":"天气预报说明天下午将有大雨。","a":"forecast","cn":"预测"},{"id":43,"s":"Don't ______ the child by giving him everything.","zh":"不要要什么给什么，把孩子给溺爱坏了。","a":"spoil","cn":"溺爱"},{"id":44,"s":"He ______ agreed to lend me his car, though he clearly did not want to.","zh":"他勉强同意把车借给我，尽管他显然并不情愿。","a":"grudgingly","cn":"勉强的，不情愿的"},{"id":45,"s":"Remember that ______, so we still need more funding to finish the project.","zh":"记住巧妇难为无米之炊，所以我们还需要更多资金才能完成这个项目。","a":"it is impossible for a professional cook to make a meal without rice","cn":"巧妇难为无米之炊"},{"id":46,"s":"The ______ of Guilin is famous around the world.","zh":"桂林的自然景色闻名于世。","a":"natural scenery","cn":"自然景色"},{"id":47,"s":"The company plans to ______ more engineers this year.","zh":"公司计划今年招募更多工程师。","a":"recruit","cn":"招募"},{"id":48,"s":"He values his ______ and rarely shares personal details online.","zh":"他很重视隐私，很少在网上分享个人信息。","a":"privacy","cn":"隐私"},{"id":49,"s":"He spent three years in ______ for the crime.","zh":"他因这项罪行在监狱里待了三年。","a":"prison","cn":"监狱"},{"id":50,"s":"Police ______ a hidden network of thieves.","zh":"警方揭露了一个隐蔽的盗窃网络。","a":"uncover","cn":"揭露"},{"id":51,"s":"The government encouraged ______ to send money back home.","zh":"政府鼓励迁出移民把钱寄回家。","a":"emigrant","cn":"从内部迁出的移民"},{"id":52,"s":"Laws have been passed to protect ______ from hunting.","zh":"已经通过法律来保护濒危物种免遭捕猎。","a":"endangered species","cn":"濒危物种"},{"id":53,"s":"The government ______ permission for the event.","zh":"政府授予了这项活动的许可。","a":"grant","cn":"授予"},{"id":54,"s":"The store offers a big ______ during the holidays.","zh":"这家商店在节日期间提供大幅打折。","a":"discount","cn":"打折"},{"id":55,"s":"______ marks the end of the Spring Festival celebrations.","zh":"元宵节标志着春节庆祝活动的结束。","a":"the Lantern Festival","cn":"元宵节"},{"id":56,"s":"The industry is controlled by strict ______ rules.","zh":"这个行业受严格的管理规定约束。","a":"regulatory","cn":"管理的"},{"id":57,"s":"The heavy rain caused a ______ that blocked the road.","zh":"大雨引发了山崩，堵住了道路。","a":"landslide","cn":"山崩"},{"id":58,"s":"I hope my words did not ______ you.","zh":"我希望我的话没有得罪你。","a":"offend","cn":"得罪，冒犯"},{"id":59,"s":"Our main ______ is to increase sales.","zh":"我们的主要目标是提高销售额。","a":"objective","cn":"目标（n.）；客观的（adj.）"},{"id":60,"s":"A ______ bit me on the arm last night.","zh":"昨晚一只蚊子咬了我的胳膊。","a":"mosquito","cn":"蚊子"},{"id":61,"s":"The train arrived at ______ nine o'clock.","zh":"火车正好九点到达。","a":"precisely","cn":"正是（表强调）"},{"id":62,"s":"Many young people have returned home under ______.","zh":"在乡村振兴战略下，许多年轻人回到了家乡。","a":"rural revitalization strategy","cn":"乡村振兴战略"},{"id":63,"s":"The ______ arranged all the meetings for the manager.","zh":"秘书为经理安排了所有的会议。","a":"secretary","cn":"秘书"},{"id":64,"s":"As a ______, she studies how families change in modern society.","zh":"作为一名社会学家，她研究家庭在现代社会中的变化。","a":"sociologist","cn":"社会学家"},{"id":65,"s":"The soup was flavored with fresh ______ and a little garlic.","zh":"这道汤用新鲜的虾和一点大蒜调味。","a":"shrimp","cn":"虾，小虾"},{"id":66,"s":"The government decided to ______ this area as a national park.","zh":"政府决定将这片区域命名为国家公园。","a":"designate","cn":"命名"},{"id":67,"s":"It is difficult to ______ these birds by appearance alone.","zh":"仅凭外观很难把这些鸟分类。","a":"classify","cn":"把……分类"},{"id":68,"s":"The town has many old ______ buildings.","zh":"这座小镇有许多古老的宗教建筑。","a":"religious","cn":"宗教的"},{"id":69,"s":"The water reached up to his ______.","zh":"水没到了他的腰部。","a":"waist","cn":"腰"},{"id":70,"s":"The university will ______ her a scholarship.","zh":"大学将授予她奖学金。","a":"grant","cn":"授予"},{"id":71,"s":"The river forms the ______ between the two countries.","zh":"这条河构成了两国之间的分界线。","a":"boundary","cn":"分界线，边界"},{"id":72,"s":"He hopes to ______ his studies next year.","zh":"他希望明年恢复学业。","a":"resume","cn":"重新开始，恢复"},{"id":73,"s":"Trade along ______ brought both goods and cultures to distant lands.","zh":"沿着海上丝绸之路的贸易把商品与文化带到了远方。","a":"the Maritime Silk Road","cn":"海上丝绸之路"},{"id":74,"s":"______ helps us understand how the universe works.","zh":"物理学帮助我们理解宇宙是如何运作的。","a":"physics","cn":"物理学"},{"id":75,"s":"The company decided to ______ production for a week.","zh":"公司决定暂停生产一周。","a":"suspend","cn":"暂停，终止"},{"id":76,"s":"The borrower was declared in ______ by the bank.","zh":"借款人被银行宣布违约。","a":"default","cn":"违约"},{"id":77,"s":"The old ______ was overthrown by the people.","zh":"旧政权被人民推翻了。","a":"regime","cn":"政权"},{"id":78,"s":"The two countries share a long ______ that runs through the mountains.","zh":"两国共享一条穿越群山的漫长边界。","a":"border","cn":"边界，边境"},{"id":79,"s":"Great changes have taken place ______.","zh":"在二十一世纪上半叶，发生了巨大的变化。","a":"in the first half of the 21st century","cn":"在二十一世纪上半叶"},{"id":80,"s":"He applied for a ______ on his new design.","zh":"他为他的新设计申请了专利。","a":"patent","cn":"专利"},{"id":81,"s":"There has been ______ improvement in his English since he started studying abroad.","zh":"自从他开始出国留学以来，他的英语有了可观的进步。","a":"considerable","cn":"可观的"},{"id":82,"s":"Learn this useful ______ by heart.","zh":"把这个有用的短语背下来。","a":"phrase","cn":"短语"},{"id":83,"s":"English is the ______ language in international business.","zh":"英语是国际商务中占支配地位的语言。","a":"dominant","cn":"占支配地位的"},{"id":84,"s":"The atmosphere in the room grew ______ as they waited for the exam results.","zh":"当他们等待考试结果时，房间里的气氛变得紧张起来。","a":"tense","cn":"紧张的，使紧张"},{"id":85,"s":"We watched the ______ display on New Year's Eve.","zh":"除夕夜我们观看了烟花表演。","a":"firework","cn":"烟花"},{"id":86,"s":"That is a ______ way to solve the problem.","zh":"那是解决这个问题的一种怪异方法。","a":"weird","cn":"怪异的"},{"id":87,"s":"The country has invested heavily in ______ for rural residents.","zh":"这个国家在农村居民的医疗保健方面投入了大量资金。","a":"medical healthcare","cn":"医疗保健"},{"id":88,"s":"We had to wait in a ______ for over an hour to get into the exhibition.","zh":"我们不得不排队一个多小时才进入展览馆。","a":"queue","cn":"队列"},{"id":89,"s":"There was ______ heat in the desert at noon.","zh":"正午的沙漠里酷热难当。","a":"intense","cn":"强烈的"},{"id":90,"s":"She cleaned the carpet with a ______ cleaner.","zh":"她用真空吸尘器清洁地毯。","a":"vacuum","cn":"真空的"},{"id":91,"s":"A stray ______ started a small fire in the field.","zh":"一枚乱飞的烟花在田里引发了一场小火灾。","a":"firework","cn":"烟花"},{"id":92,"s":"The disease can be ______ if not treated early.","zh":"这种病如果不及早治疗可能是致命的。","a":"fatal","cn":"致命的"},{"id":93,"s":"The old saying tells us that ______.","zh":"这句俗话告诉我们：巧妇难为无米之炊。","a":"it is impossible for a professional cook to make a meal without rice","cn":"巧妇难为无米之炊"},{"id":94,"s":"The ______ cost of the trip is about two thousand yuan.","zh":"这次旅行的大概费用约两千元。","a":"approximate","cn":"大概的；近似的"},{"id":95,"s":"The ______ is often seen as a symbol of perseverance.","zh":"梅花常被视为坚韧不拔的象征。","a":"plum blossom","cn":"梅花"},{"id":96,"s":"My grandfather has very ______ ideas about life.","zh":"我爷爷对生活有着非常守旧的观念。","a":"old-school","cn":"守旧的"},{"id":97,"s":"The two companies have been bitter ______ for years, competing for the same market.","zh":"这两家公司多年来一直是激烈的竞争对手，争夺同一市场。","a":"rival","cn":"竞争对手"},{"id":98,"s":"Our ______ is full of food for the holiday.","zh":"我们的冰箱装满了过节的食物。","a":"refrigerator","cn":"冰箱"},{"id":99,"s":"He used a cloth to ______ the dust off the table.","zh":"他用一块布把桌上的灰尘擦刷掉。","a":"swipe","cn":"刷"},{"id":100,"s":"The young singer became a ______ almost overnight.","zh":"那位年轻歌手几乎一夜之间成了名人。","a":"celebrity","cn":"名人"},{"id":101,"s":"The new law will ______ next month.","zh":"新法律将于下月生效。","a":"come into effect","cn":"生效"},{"id":102,"s":"Foreign ______ in the local technology sector has grown rapidly over the past decade.","zh":"过去十年，外国对当地科技领域的投资迅速增长。","a":"investment","cn":"投资"},{"id":103,"s":"It is ______ to spend time learning a second language.","zh":"花时间学一门第二语言是值得的。","a":"worthwhile","cn":"值得的"},{"id":104,"s":"The lion is a powerful ______.","zh":"狮子是一种强大的野兽。","a":"beast","cn":"野兽"},{"id":105,"s":"He tried to ______ the wrong words with an eraser.","zh":"他试图用橡皮把错字抹去。","a":"erase","cn":"抹去"},{"id":106,"s":"He was given a ______ punishment for breaking the rules.","zh":"他因违反规定而受到严厉的惩处。","a":"severe","cn":"严酷的"},{"id":107,"s":"The tax on ______ was reduced to boost imports.","zh":"进口汽车的关税被下调以促进进口。","a":"foreign-made automobiles","cn":"进口汽车"},{"id":108,"s":"The museum displays ______ ancient pottery.","zh":"博物馆展出种类繁多的古代陶器。","a":"a large variety of","cn":"种类繁多"},{"id":109,"s":"This beautiful ______ is made of silk and bamboo.","zh":"这把精美的扇子是用丝绸和竹子做的。","a":"fan","cn":"扇子"},{"id":110,"s":"Please throw your rubbish into the ______.","zh":"请把垃圾扔进垃圾桶。","a":"bin","cn":"垃圾桶"},{"id":111,"s":"The secret ______ out to the press.","zh":"这个秘密泄漏给了媒体。","a":"leak","cn":"泄漏"},{"id":112,"s":"The painting combines ______ with imagination.","zh":"这幅画把现实主义与想象结合起来。","a":"realism","cn":"现实主义"},{"id":113,"s":"His speech was ______ any real emotion.","zh":"他的演讲缺乏任何真实的情感。","a":"be devoid of","cn":"完全没有；缺乏"},{"id":114,"s":"The company went ______ after the scandal.","zh":"丑闻之后这家公司破产了。","a":"bankrupt","cn":"破产的"},{"id":115,"s":"He decided to ______ from his position as manager.","zh":"他决定辞去经理一职。","a":"resign","cn":"辞职"},{"id":116,"s":"He reached out to ______ the rope.","zh":"他伸手去抓那根绳子。","a":"grasp","cn":"把握，抓紧"},{"id":117,"s":"The government plans to ______ a series of new policies to reduce air pollution.","zh":"政府计划出台一系列新政策以减少空气污染。","a":"implement","cn":"出台"},{"id":118,"s":"An impressive ______ of experts attended the meeting.","zh":"一大批专家出席了会议。","a":"array","cn":"大量"},{"id":119,"s":"The country is slowly recovering from the ______.","zh":"这个国家正从衰退中缓慢恢复。","a":"recession","cn":"衰退"},{"id":120,"s":"Tax cuts can be a strong ______ for investment.","zh":"减税可以成为投资的强有力刺激。","a":"incentive","cn":"刺激，激励"},{"id":121,"s":"When I am tired, I ______ put off the things I should do.","zh":"当我累的时候，我倾向于把该做的事往后推。","a":"be inclined to","cn":"倾向于做某事"},{"id":122,"s":"Economists ______ that the housing market will cool down next year.","zh":"经济学家预测明年房地产市场将会降温。","a":"forecast","cn":"预测"},{"id":123,"s":"The ______ in the kitchen is powered by gas.","zh":"厨房里的炉子是用燃气驱动的。","a":"stove","cn":"炉子"},{"id":124,"s":"Many consumers prefer ______ for their better quality.","zh":"许多消费者因质量更好而更青睐进口汽车。","a":"foreign-made automobiles","cn":"进口汽车"},{"id":125,"s":"He put a large ______ into his savings account.","zh":"他把一大笔存款存入储蓄账户。","a":"deposit","cn":"存款"},{"id":126,"s":"The village lies on ______, where the soil is very fertile.","zh":"这个村庄位于洞庭湖西岸，那里的土地十分肥沃。","a":"the western shore of Dongting Lake","cn":"洞庭湖西岸"},{"id":127,"s":"The company received over a hundred ______ for the job.","zh":"公司收到了100多名求职申请人。","a":"applicant","cn":"申请人"},{"id":128,"s":"______ aims to bring new life to the countryside.","zh":"乡村振兴战略旨在为乡村注入新的活力。","a":"rural revitalization strategy","cn":"乡村振兴战略"},{"id":129,"s":"I plan to ______ in an online English class.","zh":"我打算注册一门在线英语课。","a":"enroll","cn":"注册"},{"id":130,"s":"The ______ was based on a true story.","zh":"这个电影脚本是根据真实故事改编的。","a":"movie script","cn":"电影脚本"},{"id":131,"s":"She looked ______ when she saw the result.","zh":"看到结果时她显得十分震惊。","a":"astonished","cn":"十分震惊的"},{"id":132,"s":"He collects old ______ from different countries.","zh":"他收集来自不同国家的旧邮票。","a":"stamp","cn":"邮票"},{"id":133,"s":"He was invited to join the ______ of directors.","zh":"他被邀请加入董事会。","a":"board","cn":"董事会"},{"id":134,"s":"The landlord asked for one month's rent as a ______.","zh":"房东要求一个月的租金作为押金。","a":"security deposit","cn":"押金"},{"id":135,"s":"The old town has a special ______.","zh":"这座古镇有一种特别的魅力。","a":"charm","cn":"魅力"},{"id":136,"s":"The new ______ bans smoking in public places.","zh":"这项新规定禁止在公共场所吸烟。","a":"regulation","cn":"规章制度"},{"id":137,"s":"The country's remarkable success proves the strength of ______.","zh":"这个国家举世瞩目的成功证明了中国特色社会主义道路的优越性。","a":"the socialist path with Chinese characteristics","cn":"中国特色社会主义道路"},{"id":138,"s":"In the cold winter, the ______ still blooms beautifully.","zh":"在寒冬里，梅花依然开得很美。","a":"plum blossom","cn":"梅花"},{"id":139,"s":"Please don't ______ me while I am studying.","zh":"我学习的时候请不要打扰我。","a":"bother","cn":"打扰"},{"id":140,"s":"Students can get a fifty percent ______ on tickets.","zh":"学生购票可以享受五折优惠。","a":"discount","cn":"打折"},{"id":141,"s":"The region suffered a ______ drought last summer.","zh":"去年夏天这个地区遭遇了严酷的干旱。","a":"severe","cn":"严酷的"},{"id":142,"s":"Many readers admire the loyalty and courage shown in ______.","zh":"许多读者钦佩水浒传中所表现的忠义与勇气。","a":"The Water Margin","cn":"水浒传"},{"id":143,"s":"We have ______ food for everyone.","zh":"我们有充足的食物供所有人食用。","a":"sufficient","cn":"充足的"},{"id":144,"s":"The court ______ the criminal to life imprisonment.","zh":"法庭宣判这名罪犯终身监禁。","a":"sentence","cn":"判决，宣判"},{"id":145,"s":"His ______ remarks about her appearance made everyone at the table uncomfortable.","zh":"他对她外貌的无礼评论让在座的所有人都很不自在。","a":"offensive","cn":"无礼的，冒犯的"},{"id":146,"s":"International ______ is essential for solving global problems.","zh":"国际合作对解决全球性问题至关重要。","a":"cooperation","cn":"合作"},{"id":147,"s":"You can ______ your card to pay for the ticket.","zh":"你可以刷卡来买票。","a":"swipe","cn":"刷"},{"id":148,"s":"Dream of the Red Chamber is one of ______.","zh":"红楼梦是中国四大名著之一。","a":"the Four Great Classical Novels of China","cn":"中国四大名著"},{"id":149,"s":"He invests most of his money in the ______ market.","zh":"他把大部分钱投资于股票市场。","a":"stock","cn":"股票"},{"id":150,"s":"The villagers were afraid of the wild ______.","zh":"村民们害怕野外的野兽。","a":"beast","cn":"野兽"},{"id":151,"s":"Children who lack sleep ______ make careless mistakes in their exams.","zh":"缺乏睡眠的孩子容易在考试中犯粗心的错误。","a":"be prone to","cn":"易于……的，有……倾向的"},{"id":152,"s":"Try not to ______ your emotions during the argument.","zh":"争论时尽量不要让情绪使你失去理智。","a":"get carried away with","cn":"对……失去理智"},{"id":153,"s":"He always felt ______ to his elder brother in both looks and intelligence.","zh":"无论在外貌还是才智上，他总觉得自己不如哥哥。","a":"inferior","cn":"次的，较差的"},{"id":154,"s":"The airport handles both passengers and ______.","zh":"这个机场既处理客运也处理货物。","a":"cargo","cn":"货物"},{"id":155,"s":"Parents should not ______ too much pressure on their children.","zh":"父母不应给孩子施加太大压力。","a":"exert","cn":"运用，施加"},{"id":156,"s":"The new trade agreement is expected to ______ economic growth between the two countries.","zh":"这项新的贸易协定有望促进两国之间的经济增长。","a":"promote / boost","cn":"促进"},{"id":157,"s":"Many ______ students volunteered to serve their country.","zh":"许多爱国的学生自愿为国家服务。","a":"patriotic","cn":"爱国的"},{"id":158,"s":"He did not mean to ______ anyone with his joke.","zh":"他并非有意用玩笑冒犯任何人。","a":"offend","cn":"得罪，冒犯"},{"id":159,"s":"Thousands of ______ left the country to seek opportunities abroad.","zh":"成千上万的迁出移民离开这个国家去海外寻找机会。","a":"emigrant","cn":"从内部迁出的移民"},{"id":160,"s":"The driving ______ taught me how to park.","zh":"驾驶教练教我如何停车。","a":"instructor","cn":"教练；教官"},{"id":161,"s":"The scandal ______ the public's trust in the government.","zh":"这桩丑闻逐渐侵蚀了公众对政府的信任。","a":"undermine","cn":"逐渐削弱"},{"id":162,"s":"The police found a ______ near the river.","zh":"警方在河边发现了一具尸体。","a":"dead body","cn":"尸体"},{"id":163,"s":"The report provides a clear ______ for future research.","zh":"这份报告为未来的研究提供了一个清晰的框架。","a":"framework","cn":"框架"},{"id":164,"s":"Such old coins are now considered a ______.","zh":"这样的旧硬币现在被视为稀有之物。","a":"rarity","cn":"稀有"},{"id":165,"s":"______ products are becoming increasingly popular in China.","zh":"进口的产品在中国越来越受欢迎。","a":"internationally-produced","cn":"进口的"},{"id":166,"s":"It was a ______ mistake, not an accident.","zh":"那是一个故意的错误，而不是意外。","a":"deliberate","cn":"故意的"},{"id":167,"s":"He is studying ______ at university.","zh":"他在大学学习物理学。","a":"physics","cn":"物理学"},{"id":168,"s":"She is the strongest ______ in the election.","zh":"她是选举中最有实力的候选人。","a":"candidate","cn":"候选人"},{"id":169,"s":"He wrote a ______ song that moved the whole country.","zh":"他写了一首感动全国的爱国歌曲。","a":"patriotic","cn":"爱国的"},{"id":170,"s":"The new bridge connects Hong Kong with major cities in ______.","zh":"这座新大桥把香港与珠江三角洲的主要城市连接起来。","a":"the Pearl River Delta","cn":"珠江三角洲"},{"id":171,"s":"The whole ______ took about two weeks.","zh":"整个手续花了大约两周。","a":"procedure","cn":"手续"},{"id":172,"s":"Snow in this southern area is a real ______.","zh":"在这个南方地区，下雪实属稀有罕见。","a":"rarity","cn":"稀有"},{"id":173,"s":"Helping others is a ______ act.","zh":"帮助他人是一种高尚的行为。","a":"noble","cn":"高贵的；高尚的"},{"id":174,"s":"The court ______ him innocent.","zh":"法庭认定他无罪。","a":"deem","cn":"认为"},{"id":175,"s":"This water is rich in natural ______.","zh":"这种水富含天然矿物质。","a":"mineral","cn":"矿物质"},{"id":176,"s":"Can you explain the meaning of this ______ ?","zh":"你能解释一下这个短语的意思吗？","a":"phrase","cn":"短语"},{"id":177,"s":"She kept the ______ memories of her grandmother's stories all her life.","zh":"她一生都珍藏着祖母讲故事的珍贵回忆。","a":"precious","cn":"珍贵的"},{"id":178,"s":"He remained ______ throughout the meeting, refusing to express any opinion.","zh":"整个会议期间他一直缄默不语，拒绝发表任何意见。","a":"mute","cn":"缄默的，沉默的，哑的"},{"id":179,"s":"Sales this year are expected to ______ last year's figures.","zh":"今年的销售额预计将超过去年。","a":"exceed","cn":"超过"},{"id":180,"s":"______ is known for its deep gullies and yellow earth.","zh":"黄土高原以其深沟和黄土而闻名。","a":"the Loess Plateau","cn":"黄土高原"},{"id":181,"s":"The company decided to ______ its focus to new markets.","zh":"公司决定把重心转移到新市场。","a":"shift","cn":"转移，转化"},{"id":182,"s":"Hundreds of students ______ in the course each year.","zh":"每年有数百名学生注册这门课程。","a":"enroll","cn":"注册"},{"id":183,"s":"She ______ admitted that her rival had done a better job.","zh":"她不情愿地承认她的对手做得更好。","a":"grudgingly","cn":"勉强的，不情愿的"},{"id":184,"s":"Many people ______ it impolite to ask about salary.","zh":"许多人认为打听薪水是不礼貌的。","a":"deem","cn":"认为"},{"id":185,"s":"Reporters followed the ______ everywhere she went.","zh":"记者们跟着这位名人，无论她走到哪里。","a":"celebrity","cn":"名人"},{"id":186,"s":"Traffic began to ______ smoothly again after the accident was cleared.","zh":"事故清理后，车流又开始顺畅地流动。","a":"flow","cn":"流动"},{"id":187,"s":"She gave him a ______ look to warn him.","zh":"她故意看了他一眼来警告他。","a":"deliberate","cn":"故意的"},{"id":188,"s":"She finished the race two minutes ______ of all the other runners.","zh":"她比所有其他选手提前两分钟跑完了比赛。","a":"ahead","cn":"领先，在前面"},{"id":189,"s":"The famous ______ designed this opera house.","zh":"这位著名的建筑师设计了这座歌剧院。","a":"architect","cn":"建筑师"},{"id":190,"s":"His decision was influenced by the ______ of the time.","zh":"他的决定受到了当时情况的影响。","a":"circumstance","cn":"条件，情况"},{"id":191,"s":"You should ______ the water before drinking it.","zh":"喝水前你应该先把水过滤一下。","a":"filter","cn":"过滤；过滤器"},{"id":192,"s":"The match was ______ because of heavy rain.","zh":"比赛因大雨而暂停。","a":"suspend","cn":"暂停，终止"},{"id":193,"s":"Sorry to ______ you, but could you help me for a moment?","zh":"抱歉打扰你，能帮我一下吗？","a":"bother","cn":"打扰"},{"id":194,"s":"Suzhou is famous for its classical ______.","zh":"苏州以其古典园林而闻名。","a":"Chinese garden","cn":"园林"},{"id":195,"s":"The company's ______ rose sharply on Monday.","zh":"周一这家公司的股票大幅上涨。","a":"stock","cn":"股票"},{"id":196,"s":"Protecting the ______ has become a top priority for the local government.","zh":"保护生态环境已成为当地政府的头等大事。","a":"ecological environment","cn":"生态环境"},{"id":197,"s":"The negotiations became so ______ that both sides nearly walked out.","zh":"谈判变得如此紧张，双方差点中途离场。","a":"tense","cn":"紧张的，使紧张"},{"id":198,"s":"______ is a serious problem in big cities.","zh":"交通拥堵是大城市的一个严重问题。","a":"traffic congestion","cn":"交通拥堵"},{"id":199,"s":"We must respect everyone's right to ______.","zh":"我们必须尊重每个人的隐私权。","a":"privacy","cn":"隐私"},{"id":200,"s":"Students who ______ behind may need extra help.","zh":"掉队的学生可能需要额外的帮助。","a":"lag","cn":"掉队"},{"id":201,"s":"They built the house with a steel ______.","zh":"他们用钢框架建造了这座房子。","a":"framework","cn":"框架"},{"id":202,"s":"The travel guide recommends an ______ that you should not miss in this region.","zh":"这本旅游指南推荐了一种你在这一地区不容错过的地道的当地特色小吃。","a":"authentic local distinctive snack","cn":"地道的当地特色小吃"},{"id":203,"s":"______ has lifted hundreds of millions of people out of poverty.","zh":"脱贫攻坚使数亿人摆脱了贫困。","a":"poverty alleviation","cn":"脱贫攻坚"},{"id":204,"s":"The strange result began to ______ the scientists.","zh":"这个奇怪的结果开始使科学家们感到迷惑。","a":"puzzle","cn":"使迷惑"},{"id":205,"s":"Tourists come here to enjoy the beautiful ______.","zh":"游客们来这里欣赏美丽的自然景色。","a":"natural scenery","cn":"自然景色"},{"id":206,"s":"Clean drinking water is a ______ resource that we must not waste.","zh":"清洁的饮用水是一种珍贵的资源，我们绝不能浪费。","a":"precious","cn":"珍贵的"},{"id":207,"s":"Since ______, the country's economy has grown rapidly.","zh":"自改革开放以来，这个国家的经济迅速发展。","a":"reform and opening-up","cn":"改革开放"},{"id":208,"s":"Working from home has become the ______ for many people.","zh":"居家办公已成为许多人的常态。","a":"norm","cn":"规范，准则"},{"id":209,"s":"She won the ______ for best actress.","zh":"她获得了最佳女演员奖。","a":"award","cn":"奖励"},{"id":210,"s":"The project turned out to be a ______ success.","zh":"这个项目最终取得了巨大的成功。","a":"tremendous","cn":"巨大的"},{"id":211,"s":"The pillars are not solid but ______.","zh":"这些柱子不是实心的，而是中空的。","a":"hollow","cn":"空的，中空的"},{"id":212,"s":"As a ______, she has both strengths and weaknesses.","zh":"作为人类的一员，她既有长处也有弱点。","a":"human being","cn":"人类"},{"id":213,"s":"The government is investing heavily in ______.","zh":"政府正在基础设施方面投入大量资金。","a":"infrastructure","cn":"基础设施"},{"id":214,"s":"The mountain path was too ______ to climb.","zh":"这条山道太陡峭，无法攀爬。","a":"steep","cn":"陡峭的"},{"id":215,"s":"He never crosses the ______ of good taste.","zh":"他从不越出高雅品味的边界。","a":"boundary","cn":"分界线，边界"},{"id":216,"s":"The ______ will meet to discuss the company's future.","zh":"董事会将开会讨论公司的未来。","a":"board","cn":"董事会"},{"id":217,"s":"She loves traveling to ______ places.","zh":"她喜欢到奇异的地方旅行。","a":"exotic","cn":"奇异的"},{"id":218,"s":"The ship was carrying a heavy ______ of grain.","zh":"这艘船载着大批粮食货物。","a":"cargo","cn":"货物"},{"id":219,"s":"Workers loaded boxes onto trucks at the ______.","zh":"工人们在仓库里把箱子装上卡车。","a":"warehouse","cn":"仓库"},{"id":220,"s":"The country exports coal and other ______ resources.","zh":"这个国家出口煤炭和其他矿产资源。","a":"mineral","cn":"矿物质"},{"id":221,"s":"He is a bit ______ and still writes letters by hand.","zh":"他有点守旧，仍然手写书信。","a":"old-school","cn":"守旧的"},{"id":222,"s":"The disease damages the ______ system.","zh":"这种疾病会损害神经系统。","a":"neural","cn":"神经的"},{"id":223,"s":"The project required a ______ amount of money and took three years to complete.","zh":"这个项目需要一笔可观的资金，花了三年才完成。","a":"considerable","cn":"可观的"},{"id":224,"s":"The poet praises the lotus because ______.","zh":"诗人赞美荷花，因为它迎骄阳而不惧，出淤泥而不染。","a":"the lotus flower stands fearlessly under the blazing sun and keeps itself clean in dirty water","cn":"荷花迎骄阳而不惧，出淤泥而不染"},{"id":225,"s":"Her health improved ______ after she started exercising every day.","zh":"开始每天锻炼之后，她的健康状况稳步好转。","a":"steadily","cn":"稳步地，平稳地"},{"id":226,"s":"A coffee machine uses a paper ______.","zh":"咖啡机使用纸质过滤器。","a":"filter","cn":"过滤；过滤器"},{"id":227,"s":"He pulled a ______ while playing football.","zh":"他踢足球时拉伤了一块肌肉。","a":"muscle","cn":"肌肉"},{"id":228,"s":"The long battle ______ the army's supplies.","zh":"长期作战大量消耗了军队的补给。","a":"deplete","cn":"大量消耗"},{"id":229,"s":"The journey was long, but it was ______.","zh":"旅程漫长，但很值得。","a":"worthwhile","cn":"值得的"},{"id":230,"s":"The high-speed train's ______ has been increased to meet demand.","zh":"高铁的客运能力已被提高以满足需求。","a":"passenger capacity","cn":"客运能力"},{"id":231,"s":"You must learn to ______ yourself against unfair criticism.","zh":"你必须学会为自己抵御不公平的批评。","a":"defend","cn":"防御"},{"id":232,"s":"Several people were ______ when the bomb went off.","zh":"炸弹爆炸时，有几个人受了伤。","a":"wound","cn":"使受伤（战斗中）"},{"id":233,"s":"He did not ______ for the final round.","zh":"他没有获得决赛资格。","a":"qualify","cn":"有资格去做"},{"id":234,"s":"The teacher told us that math is ______.","zh":"老师告诉我们，数学很重要、意义重大。","a":"of great consequence","cn":"数学很重要"},{"id":235,"s":"As a new ______, he worked hard to fit into local society.","zh":"作为一名新迁入的移民，他努力融入当地社会。","a":"immigrant","cn":"从外部迁入的移民"},{"id":236,"s":"______ was a great thinker and educator in ancient China.","zh":"孔子是中国古代伟大的思想家与教育家。","a":"Confucius","cn":"孔夫子"},{"id":237,"s":"Please ______ any food that has gone bad.","zh":"请把任何变质的食物丢弃。","a":"discard","cn":"丢弃"},{"id":238,"s":"The china teacup is very ______ and easy to break.","zh":"这只瓷茶杯十分精美，也很容易碎。","a":"delicate","cn":"精美的"},{"id":239,"s":"She has a ______ amount of energy for someone her age.","zh":"以她这个年纪来说，她的精力十分巨大。","a":"tremendous","cn":"巨大的"},{"id":240,"s":"The company offers bonuses as an ______ to work harder.","zh":"公司提供奖金作为更努力工作的激励。","a":"incentive","cn":"刺激，激励"},{"id":241,"s":"The doctor wrote the ______ instead of the brand name.","zh":"医生写的是药物的总称，而不是品牌名。","a":"generic name","cn":"总称"},{"id":242,"s":"I attended a ______ about climate change yesterday.","zh":"我昨天听了一场关于气候变化的讲座。","a":"lecture","cn":"讲座"},{"id":243,"s":"He had a ______ fall from his bike and broke his arm.","zh":"他从自行车上狠狠地摔了一跤，摔断了胳膊。","a":"nasty","cn":"令人讨厌的，糟糕的"},{"id":244,"s":"Every society has its own social ______.","zh":"每个社会都有自己的社会规范。","a":"norm","cn":"规范，准则"},{"id":245,"s":"______ has greatly changed the face of China over the past few decades.","zh":"改革开放在过去几十年里极大地改变了中国的面貌。","a":"reform and opening-up","cn":"改革开放"},{"id":246,"s":"The evidence was not ______ to prove his guilt.","zh":"证据不足以证明他有罪。","a":"sufficient","cn":"充足的"},{"id":247,"s":"He ______ the excitement and spent too much money.","zh":"他因兴奋而失去理智，花了太多钱。","a":"get carried away with","cn":"对……失去理智"},{"id":248,"s":"Good ______ is essential for economic growth.","zh":"良好的基础设施对经济增长至关重要。","a":"infrastructure","cn":"基础设施"},{"id":249,"s":"Too much ______ is bad for your health.","zh":"吃太多加工食物对健康有害。","a":"processed food","cn":"加工食物"},{"id":250,"s":"The dam project was criticized for causing serious damage to the ______.","zh":"这座大坝工程因对生态环境造成严重破坏而受到批评。","a":"ecological environment","cn":"生态环境"},{"id":251,"s":"The word has a deeper ______ than you think.","zh":"这个词的含义比你想象的更深。","a":"implication","cn":"含义"},{"id":252,"s":"The children were fascinated to watch a ______ turn into a butterfly.","zh":"孩子们着迷地看着一条毛毛虫变成蝴蝶。","a":"caterpillar","cn":"毛毛虫"},{"id":253,"s":"Grandparents often ______ their grandchildren.","zh":"祖父母常常溺爱他们的孙辈。","a":"spoil","cn":"溺爱"},{"id":254,"s":"Everyone should have access to basic ______.","zh":"每个人都应该享有基本的医疗保健。","a":"medical healthcare","cn":"医疗保健"},{"id":255,"s":"In Chinese poetry, ______ is a symbol of purity and noble character.","zh":"在中国诗歌中，荷花迎骄阳而不惧、出淤泥而不染，是纯洁与高尚品格的象征。","a":"the lotus flower stands fearlessly under the blazing sun and keeps itself clean in dirty water","cn":"荷花迎骄阳而不惧，出淤泥而不染"},{"id":256,"s":"The school will ______ prizes to the top students.","zh":"学校将把奖品颁发给优秀学生。","a":"award","cn":"奖励"},{"id":257,"s":"The soldier was badly ______ in the battle.","zh":"这名士兵在战斗中受了重伤。","a":"wound","cn":"使受伤（战斗中）"},{"id":258,"s":"A tiny ______ crawled slowly across the green leaf in the garden.","zh":"一条小小的毛毛虫在花园的绿叶上缓缓爬行。","a":"caterpillar","cn":"毛毛虫"},{"id":259,"s":"He came from a ______ family with a long history.","zh":"他出身于一个历史悠久的贵族家庭。","a":"noble","cn":"高贵的；高尚的"},{"id":260,"s":"Fishermen set out before dawn from ______.","zh":"渔民们天亮前就从洞庭湖西岸出发。","a":"the western shore of Dongting Lake","cn":"洞庭湖西岸"},{"id":261,"s":"Few people realized the ______ of the problem until it was too late.","zh":"直到为时已晚，很少有人意识到这个问题的重要性。","a":"magnitude","cn":"重要性；震级"},{"id":262,"s":"The desert ______ for miles in every direction, with nothing but sand to be seen.","zh":"沙漠向四面八方绵延（伸展）数英里，除了沙子什么也看不到。","a":"stretch","cn":"伸展，拉长"},{"id":263,"s":"The new ______ promised democratic reforms.","zh":"新政权承诺进行民主改革。","a":"regime","cn":"政权"},{"id":264,"s":"Doctors had to ______ the patient to stop the infection.","zh":"医生不得不隔离病人以阻止感染。","a":"isolate","cn":"隔离"},{"id":265,"s":"Don't ______ this chance to study abroad.","zh":"不要放弃这次出国留学的机会。","a":"pass up","cn":"放弃，错过（机会）"},{"id":266,"s":"He was put under ______ for stealing.","zh":"他因盗窃被逮捕。","a":"arrest","cn":"逮捕"},{"id":267,"s":"They sold the goods at a ______ of thirty percent.","zh":"他们以百分之三十的利润卖出了货物。","a":"profit","cn":"利润"},{"id":268,"s":"Cold weather can reduce a car's ______.","zh":"寒冷的天气会降低汽车电池的续航能力。","a":"battery capacity","cn":"续航能力"},{"id":269,"s":"China has been steadily advancing along ______.","zh":"中国一直沿着中国特色社会主义道路稳步前进。","a":"the socialist path with Chinese characteristics","cn":"中国特色社会主义道路"},{"id":270,"s":"Fishermen along the coast catch ______ and sell them at the morning market.","zh":"沿海的渔民捕捞小虾，在早市上出售。","a":"shrimp","cn":"虾，小虾"},{"id":271,"s":"The company delayed the ______ because of the storm.","zh":"公司因暴风雨而推迟了运输。","a":"shipment","cn":"运输"},{"id":272,"s":"The old farmer grows vegetables on ______ that he inherited from his father.","zh":"这位老农在他从父亲那里继承的一块土地上种菜。","a":"a plot of land","cn":"一块土地"},{"id":273,"s":"Many species of fish live in this ______.","zh":"许多种鱼生活在这个淡水湖里。","a":"freshwater lake","cn":"淡水湖"},{"id":274,"s":"______ is a major industry in this region.","zh":"采矿业是这个地区的主要产业。","a":"mining","cn":"采矿，采矿业"},{"id":275,"s":"Firefighters carried the ______ out of the burning building.","zh":"消防员把尸体从燃烧的大楼里抬了出来。","a":"dead body","cn":"尸体"},{"id":276,"s":"She earns a ______ salary but lives comfortably.","zh":"她的收入适中，但生活舒适。","a":"modest","cn":"适中的；不太多的"},{"id":277,"s":"The disease may ______ itself as a high fever.","zh":"这种疾病可能表现为高烧。","a":"manifest","cn":"显示，表明"},{"id":278,"s":"The writer spent months finishing the ______.","zh":"这位作家花了几个月完成电影脚本。","a":"movie script","cn":"电影脚本"},{"id":279,"s":"______ has become an important source of income for the city.","zh":"旅游业已成为这座城市重要的收入来源。","a":"tourism","cn":"旅游业"},{"id":280,"s":"Many games and films are based on ______.","zh":"许多游戏和电影都取材于三国演义。","a":"The Romance of the Three Kingdoms","cn":"三国演义"},{"id":281,"s":"The custom of giving gifts during Spring Festival ______ in Chinese culture.","zh":"春节送礼的习俗深深根植于中国文化之中。","a":"be deeply rooted","cn":"深深的根植于"},{"id":282,"s":"The hotel offers a ______ meal prepared by a famous chef.","zh":"这家酒店提供由名厨烹制的美食。","a":"gourmet","cn":"美食的；美食家"},{"id":283,"s":"You will get your ______ back when you move out.","zh":"你搬走时押金会退还给你。","a":"security deposit","cn":"押金"},{"id":284,"s":"People hang colorful lanterns to celebrate ______.","zh":"人们挂起彩灯来庆祝元宵节。","a":"the Lantern Festival","cn":"元宵节"},{"id":285,"s":"The village was ______ by the heavy snow.","zh":"这个村庄因大雪而被隔离。","a":"isolate","cn":"隔离"},{"id":286,"s":"She likes to ______ on her desk.","zh":"她喜欢把桌上的东西保持得井井有条。","a":"keep everything in good order","cn":"保持一切井井有条"},{"id":287,"s":"Farmers on ______ have planted trees to prevent soil erosion.","zh":"黄土高原上的农民植树以防止水土流失。","a":"the Loess Plateau","cn":"黄土高原"},{"id":288,"s":"Workers were busy at the ______ all day long.","zh":"工人们整天都在建筑工地上忙碌。","a":"construction site","cn":"建筑工地"},{"id":289,"s":"The meeting will ______ after a short break.","zh":"短暂休息后会议将重新开始。","a":"resume","cn":"重新开始，恢复"},{"id":290,"s":"China is home to 56 ______.","zh":"中国有56个少数民族。","a":"ethnic group","cn":"少数民族"},{"id":291,"s":"Scientists measured the ______ of the earthquake at 7.0 on the Richter scale.","zh":"科学家测得这次地震的震级为里氏 7.0 级。","a":"magnitude","cn":"重要性；震级"},{"id":292,"s":"The government launched an ______ to reduce pollution.","zh":"政府发起了一项减少污染的倡议。","a":"initiative","cn":"倡议；主动性"},{"id":293,"s":"We need more ______ space for all these files.","zh":"我们需要更多储存空间来存放这些文件。","a":"storage","cn":"储存"},{"id":294,"s":"The teacher explained the ______ in simple words.","zh":"老师用简单的话解释了这个概念。","a":"concept","cn":"概念"},{"id":295,"s":"The old man had been ______ since birth and communicated through sign language.","zh":"这位老人天生就是哑的，靠手语交流。","a":"mute","cn":"缄默的，沉默的，哑的"},{"id":296,"s":"The store sells both local and ______ goods.","zh":"这家商店既卖本地商品也卖进口商品。","a":"internationally-produced","cn":"进口的"},{"id":297,"s":"The company agreed to ______ the whole project.","zh":"公司同意承担整个项目。","a":"undertake","cn":"承担"},{"id":298,"s":"The judge will ______ him to five years in prison.","zh":"法官将判处他五年监禁。","a":"sentence","cn":"判决，宣判"},{"id":299,"s":"The constant noise from the street is really ______.","zh":"街上不断的噪音真令人烦躁。","a":"annoying","cn":"令人烦躁的"},{"id":300,"s":"The company failed to ______ its promises.","zh":"这家公司没能履行它的承诺。","a":"fulfill","cn":"履行"},{"id":301,"s":"The scientists faced ______ difficulties before they finally succeeded.","zh":"科学家们面临许多困难，最终才取得成功。","a":"a host of","cn":"大量的，许多的"},{"id":302,"s":"My uncle is a real ______ who knows every good restaurant in town.","zh":"我叔叔是个真正的美食家，城里每一家好餐馆他都知道。","a":"gourmet","cn":"美食的；美食家"},{"id":303,"s":"Rice is the main ______ in many Asian countries.","zh":"大米是许多亚洲国家的主食。","a":"staple","cn":"主食"},{"id":304,"s":"The director tried to ______ the story for the screen.","zh":"导演试图把这个故事为搬上银幕而戏剧化。","a":"dramatize","cn":"戏剧化"},{"id":305,"s":"Visitors come to Luoyang every spring to admire the ______.","zh":"每年春天游客们都到洛阳来欣赏牡丹。","a":"peony","cn":"牡丹"},{"id":306,"s":"They bought new ______ for the living room.","zh":"他们为客厅买了新家具。","a":"furniture","cn":"家具"},{"id":307,"s":"The giant panda was once an ______.","zh":"大熊猫曾经是濒危物种。","a":"endangered species","cn":"濒危物种"},{"id":308,"s":"The Sichuan ______ is one of the most fertile areas in China.","zh":"四川盆地是中国最富饶的地区之一。","a":"basin","cn":"盆地"},{"id":309,"s":"Some people found the joke ______, so the comedian apologized.","zh":"有些人觉得这个玩笑很冒犯，于是那位喜剧演员道了歉。","a":"offensive","cn":"无礼的，冒犯的"},{"id":310,"s":"He lost the case because he went into ______ on the loan.","zh":"他因贷款违约而输掉了这场官司。","a":"default","cn":"违约"},{"id":311,"s":"The building is ______.","zh":"这座建筑是中外建筑师长期合作的结果。","a":"the result of long-term cooperation between foreign and Chinese architects","cn":"中外建筑师长期合作的结果"},{"id":312,"s":"He has a ______ habit of talking to himself.","zh":"他有自言自语这种怪异的习惯。","a":"weird","cn":"怪异的"},{"id":313,"s":"This area ______ violent storms in early summer.","zh":"这个地区在初夏容易遭遇猛烈的暴风雨。","a":"be prone to","cn":"易于……的，有……倾向的"},{"id":314,"s":"Scientists are studying the brain's ______ networks.","zh":"科学家们正在研究大脑的神经网络。","a":"neural","cn":"神经的"},{"id":315,"s":"The festival attracted thousands of ______ eager to enjoy the music and food.","zh":"这个节日吸引了数千名渴望享受音乐和美食的年轻人。","a":"youngster","cn":"年轻人"},{"id":316,"s":"The government has begun to ______ protecting the traditional culture of ethnic minorities.","zh":"政府已开始重视保护少数民族的传统文化。","a":"attach importance to","cn":"重视"},{"id":317,"s":"Aspirin is actually a ______ for a common medicine.","zh":"阿司匹林其实是一种常见药物的一般名称（总称）。","a":"generic name","cn":"总称"},{"id":318,"s":"She dreams of becoming an ______ one day.","zh":"她梦想有朝一日成为一名建筑师。","a":"architect","cn":"建筑师"},{"id":319,"s":"His anger ______ in the way he spoke.","zh":"他的愤怒通过说话的方式显露出来。","a":"manifest","cn":"显示，表明"},{"id":320,"s":"She made a ______ of five thousand yuan at the bank.","zh":"她在银行存了五千元存款。","a":"deposit","cn":"存款"},{"id":321,"s":"The ______ opened the new library to the public.","zh":"市长为新图书馆向公众开放剪彩。","a":"mayor","cn":"市长"},{"id":322,"s":"The new rule may ______ small businesses.","zh":"这项新规定可能使小企业处于不利地位。","a":"disadvantage","cn":"使处于不利地位"},{"id":323,"s":"The lantern riddle ______ three parts.","zh":"灯谜由三部分组成。","a":"consist of","cn":"由……组成"},{"id":324,"s":"Put the milk in the ______ so it stays fresh.","zh":"把牛奶放进冰箱里以保持新鲜。","a":"refrigerator","cn":"冰箱"},{"id":325,"s":"Please send the file to the company ______.","zh":"请把文件发给公司秘书。","a":"secretary","cn":"秘书"},{"id":326,"s":"The boots cover his ______ and keep it warm.","zh":"这双靴子包住他的脚踝，让它保持温暖。","a":"ankle","cn":"脚踝"},{"id":327,"s":"Constant criticism can ______ a child's confidence.","zh":"不断的批评会逐渐削弱孩子的自信。","a":"undermine","cn":"逐渐削弱"},{"id":328,"s":"She told me a different ______ of the story.","zh":"她给我讲了这件事的另一个版本。","a":"version","cn":"版本"},{"id":329,"s":"The tree trunk is ______ inside.","zh":"这棵树的树干里面是中空的。","a":"hollow","cn":"空的，中空的"},{"id":330,"s":"There are three ______ for the position.","zh":"这个职位有三名候选人。","a":"candidate","cn":"候选人"},{"id":331,"s":"A large ______ of goods arrived at the port.","zh":"一大批货物运抵港口。","a":"shipment","cn":"运输"},{"id":332,"s":"Entire villages were buried by the ______.","zh":"整个村庄都被山崩掩埋了。","a":"landslide","cn":"山崩"},{"id":333,"s":"New machines have greatly sped up ______ in the region.","zh":"新机器大大加快了这个地区的农业现代化进程。","a":"agricultural modernization","cn":"农业现代化"},{"id":334,"s":"The committee ______ ten members from different fields.","zh":"委员会由来自不同领域的十名成员组成。","a":"consist of","cn":"由……组成"},{"id":335,"s":"What you decide now is ______ to your future.","zh":"你现在的决定对你的未来意义重大。","a":"of great consequence","cn":"数学很重要"},{"id":336,"s":"The tiger is a ______ animal that hunts at night.","zh":"老虎是一种凶猛的野兽，在夜间捕猎。","a":"fierce","cn":"强烈（凶猛、激烈）"},{"id":337,"s":"Families get together and eat mooncakes during ______.","zh":"中秋节期间，家人聚在一起吃月饼。","a":"the Mid-Autumn Festival","cn":"中秋节"},{"id":338,"s":"A new ______ body was set up to oversee the market.","zh":"成立了一个新的管理机构来监管市场。","a":"regulatory","cn":"管理的"},{"id":339,"s":"We must consider the ______ of this decision.","zh":"我们必须考虑这个决定的内含意义。","a":"implication","cn":"含义"},{"id":340,"s":"Do not mistake her silence for rudeness; she is simply an ______.","zh":"别把她的沉默当成无礼，她只是个内向的人。","a":"introvert","cn":"内向的人"},{"id":341,"s":"Sound cannot travel through a ______.","zh":"声音无法在真空中传播。","a":"vacuum","cn":"真空的"},{"id":342,"s":"The company made a large ______ last year.","zh":"这家公司去年赚了一大笔利润。","a":"profit","cn":"利润"},{"id":343,"s":"The escaped prisoner was sent back to ______.","zh":"越狱的囚犯被送回了监狱。","a":"prison","cn":"监狱"},{"id":344,"s":"The company suffered a heavy ______ last quarter.","zh":"公司上个季度遭受了严重的损失。","a":"loss","cn":"损失"},{"id":345,"s":"The flood caused huge ______ to local farmers.","zh":"洪水给当地农民造成了巨大损失。","a":"loss","cn":"损失"},{"id":346,"s":"Our team is well ______ of the others in terms of sales this quarter.","zh":"就本季度的销售额而言，我们团队遥遥领先于其他团队。","a":"ahead","cn":"领先，在前面"},{"id":347,"s":"Villagers had to ______ the dead after the disaster.","zh":"灾难过后村民们不得不埋葬死者。","a":"bury","cn":"埋葬"},{"id":348,"s":"Many businesses closed during the economic ______.","zh":"经济衰退期间许多企业倒闭了。","a":"recession","cn":"衰退"},{"id":349,"s":"The company holds several ______ for its inventions.","zh":"这家公司拥有多项发明的专利。","a":"patent","cn":"专利"},{"id":350,"s":"The ideas of ______ still influence the way Chinese people live today.","zh":"孔子的思想至今仍影响着中国人的生活方式。","a":"Confucius","cn":"孔夫子"},{"id":351,"s":"A tall ______ stands beside the old house.","zh":"一棵高大的松树矗立在老房子旁。","a":"pine tree","cn":"松树"},{"id":352,"s":"Planting trees helped increase the ______ on the hills.","zh":"植树有助于提高山坡上的草地覆盖率。","a":"grass coverage rate","cn":"草地覆盖率"},{"id":353,"s":"We were ______ at the news of his sudden death.","zh":"听到他猝然离世的消息，我们十分震惊。","a":"astonished","cn":"十分震惊的"},{"id":354,"s":"They bought ______ on the edge of the village to build a house.","zh":"他们在村边买了一块土地盖房子。","a":"a plot of land","cn":"一块土地"},{"id":355,"s":"The new subway will help ease ______.","zh":"新地铁将有助于缓解交通拥堵。","a":"traffic congestion","cn":"交通拥堵"},{"id":356,"s":"Technology developed extremely fast ______.","zh":"在二十一世纪上半叶，技术发展极为迅速。","a":"in the first half of the 21st century","cn":"在二十一世纪上半叶"},{"id":357,"s":"She comes from a deeply ______ family.","zh":"她来自一个宗教信仰很深的家庭。","a":"religious","cn":"宗教的"},{"id":358,"s":"The desert is almost completely ______ water.","zh":"这片沙漠几乎完全没有水。","a":"be devoid of","cn":"完全没有；缺乏"},{"id":359,"s":"______ means meeting today's needs without harming the future.","zh":"可持续发展意味着满足当代需求而不损害未来。","a":"sustainable development","cn":"可持续发展"},{"id":360,"s":"______ is considered one of the greatest Chinese novels ever written.","zh":"红楼梦被认为是中国有史以来最伟大的小说之一。","a":"A Dream of Red Mansions","cn":"红楼梦"},{"id":361,"s":"The ______ is full, so I need to take out the trash.","zh":"垃圾桶满了，我得把垃圾倒了。","a":"bin","cn":"垃圾桶"},{"id":362,"s":"The ______ blew the whistle to stop the game.","zh":"裁判吹哨停止了比赛。","a":"referee","cn":"裁判"},{"id":363,"s":"They decided to ______ the old dog in the garden.","zh":"他们决定把老狗埋葬在花园里。","a":"bury","cn":"埋葬"},{"id":364,"s":"Many workers are employed in coal ______.","zh":"许多工人受雇于煤矿开采业。","a":"mining","cn":"采矿，采矿业"},{"id":365,"s":"______ reflects the rise and fall of a large noble family.","zh":"红楼梦反映了一个大家族由盛转衰的过程。","a":"A Dream of Red Mansions","cn":"红楼梦"},{"id":366,"s":"Safety helmets are required on every ______.","zh":"每个建筑工地都要求佩戴安全帽。","a":"construction site","cn":"建筑工地"},{"id":367,"s":"He used his ______ to win their support.","zh":"他用自己的魅力赢得了他们的支持。","a":"charm","cn":"魅力"},{"id":368,"s":"The reporter helped ______ the truth.","zh":"这名记者帮助揭露了真相。","a":"uncover","cn":"揭露"},{"id":369,"s":"In ancient times, almost every woman in Shanghai carried a ______.","zh":"在古代，上海几乎每个女子都拿着一把扇子。","a":"fan","cn":"扇子"},{"id":370,"s":"Rising sea levels pose a serious threat to many ______ cities around the world.","zh":"海平面上升对世界上许多沿海城市构成严重威胁。","a":"coastal","cn":"近海的，沿海的"},{"id":371,"s":"The project succeeded thanks to close ______ between the two teams.","zh":"这个项目得益于两支团队之间的密切合作而成功。","a":"cooperation","cn":"合作"},{"id":372,"s":"The factory relies on highly ______ machinery to produce microchips with extreme precision.","zh":"这家工厂依靠极其精密的机器来生产高精度的微芯片。","a":"sophisticated","cn":"精密的，复杂的（机器）"},{"id":373,"s":"Being an ______, she makes friends easily wherever she goes.","zh":"作为一个外向的人，她走到哪里都能轻松交到朋友。","a":"extrovert","cn":"外向的人"},{"id":374,"s":"It is hard to grasp such an abstract ______.","zh":"很难理解这样一个抽象的概念。","a":"concept","cn":"概念"},{"id":375,"s":"Buying a house is often the biggest ______ a family ever makes.","zh":"买房往往是一个家庭做过的最大一笔投资。","a":"investment","cn":"投资"},{"id":376,"s":"A traditional ______ often combines water, rocks and pavilions.","zh":"传统园林常把水、石头与亭台结合起来。","a":"Chinese garden","cn":"园林"},{"id":377,"s":"Many smartphones now support ______ for more accurate navigation.","zh":"如今许多智能手机支持北斗卫星导航系统，以获得更精准的导航。","a":"the Beidou Satellite Navigation System","cn":"北斗卫星导航系统"},{"id":378,"s":"The company is committed to ______ and green energy.","zh":"这家公司致力于可持续发展和绿色能源。","a":"sustainable development","cn":"可持续发展"},{"id":379,"s":"______ linked ancient China with Southeast Asia and the Middle East.","zh":"海上丝绸之路把古代中国与东南亚及中东连接起来。","a":"the Maritime Silk Road","cn":"海上丝绸之路"},{"id":380,"s":"We trust him because of his honesty and ______.","zh":"由于他的诚实与正直，我们信任他。","a":"integrity","cn":"完整性"},{"id":381,"s":"He was almost ______ after losing all his money.","zh":"在失去所有钱后，他几乎破产了。","a":"bankrupt","cn":"破产的"},{"id":382,"s":"The professor gave an interesting ______ on history.","zh":"教授做了一场关于历史的有趣讲座。","a":"lecture","cn":"讲座"},{"id":383,"s":"The company gave him a big bonus as a ______ for his efforts.","zh":"公司给了他一笔丰厚的奖金，作为对他努力的回报。","a":"reward","cn":"回报"},{"id":384,"s":"We put up a net to keep the ______ out.","zh":"我们挂起蚊帐来挡蚊子。","a":"mosquito","cn":"蚊子"},{"id":385,"s":"As a natural ______, he prefers reading at home to going to parties.","zh":"作为一个天生的内向的人，他宁愿在家读书也不愿去参加聚会。","a":"introvert","cn":"内向的人"},{"id":386,"s":"These wetlands are an important stop on ______.","zh":"这些湿地是候鸟迁徙路线上的重要停歇地。","a":"the migration of migratory birds","cn":"候鸟迁徙路线"},{"id":387,"s":"Thousands of refugees crossed the ______ in search of safety.","zh":"数千名难民越过边境寻求安全。","a":"border","cn":"边界，边境"},{"id":388,"s":"People who are shy ______ avoid speaking in public.","zh":"害羞的人倾向于避免在公众面前讲话。","a":"be inclined to","cn":"倾向于做某事"},{"id":389,"s":"Each ______ must submit two references.","zh":"每位申请人都必须提交两封推荐信。","a":"applicant","cn":"申请人"},{"id":390,"s":"She was elected ______ of the city last year.","zh":"她去年当选为市长。","a":"mayor","cn":"市长"},{"id":391,"s":"She ______ because of the heavy workload.","zh":"她因工作量过重而辞职。","a":"resign","cn":"辞职"},{"id":392,"s":"The hotel is ______ walking distance of the station.","zh":"这家酒店在车站步行可达的范围内。","a":"within","cn":"在……范围内"},{"id":393,"s":"Follow the correct ______ when applying for a visa.","zh":"申请签证时要遵循正确的手续。","a":"procedure","cn":"手续"},{"id":394,"s":"There are ______ reasons why young people leave their hometowns to work in big cities.","zh":"年轻人离开家乡去大城市工作有许多原因。","a":"a host of","cn":"大量的，许多的"},{"id":395,"s":"______ are widely read both at home and abroad.","zh":"中国四大名著在国内外部被广泛阅读。","a":"the Four Great Classical Novels of China","cn":"中国四大名著"},{"id":396,"s":"She felt ______ pressure before the final exam.","zh":"期末考试前她感到强烈的压力。","a":"intense","cn":"强烈的"},{"id":397,"s":"Many ______ left their home villages to look for work in the big cities.","zh":"许多外来务工者离开家乡，去大城市找工作。","a":"emigrant workers","cn":"外来务工者"},{"id":398,"s":"Scientists have been tracking ______ along the eastern coast for years.","zh":"科学家多年来一直沿东海岸追踪候鸟迁徙路线。","a":"the migration of migratory birds","cn":"候鸟迁徙路线"},{"id":399,"s":"He began to ______ behind the other runners.","zh":"他开始落在其他跑步者后面（掉队）。","a":"lag","cn":"掉队"},{"id":400,"s":"A judge must remain ______ and fair.","zh":"法官必须保持客观公正。","a":"objective","cn":"目标（n.）；客观的（adj.）"},{"id":401,"s":"The local government is trying to develop ______.","zh":"当地政府正努力发展旅游业。","a":"tourism","cn":"旅游业"},{"id":402,"s":"China developed ______ to provide positioning services around the world.","zh":"中国研发了北斗卫星导航系统，为全球提供定位服务。","a":"the Beidou Satellite Navigation System","cn":"北斗卫星导航系统"},{"id":403,"s":"The new airport is designed to double its ______.","zh":"新机场的设计使其客运能力翻倍。","a":"passenger capacity","cn":"客运能力"},{"id":404,"s":"Copying all the data by hand was such a ______ task that I nearly fell asleep.","zh":"手工抄录所有数据是一项极其冗长乏味的工作，我差点睡着了。","a":"tedious","cn":"冗长乏味的"},{"id":405,"s":"Every ______ deserves to be treated with respect.","zh":"每一个人都应受到尊重。","a":"human being","cn":"人类"},{"id":406,"s":"The ______ of the data must be protected.","zh":"数据的完整性必须得到保护。","a":"integrity","cn":"完整性"},{"id":407,"s":"The house is ______ in size but very cozy.","zh":"这房子面积不太大，但非常温馨。","a":"modest","cn":"适中的；不太多的"},{"id":408,"s":"UNESCO ______ this ancient town as a World Heritage Site.","zh":"联合国教科文组织将这座古镇命名为世界遗产。","a":"designate","cn":"命名"},{"id":409,"s":"The supermarket has a large section of frozen ______.","zh":"超市里有一大块冷冻加工食品区。","a":"processed food","cn":"加工食物"},{"id":410,"s":"The film contains several ______ scenes.","zh":"这部电影包含若干暴力场面。","a":"violent","cn":"暴力的"},{"id":411,"s":"The rules ______ immediately after the announcement.","zh":"这些规定在公布后立即生效。","a":"come into effect","cn":"生效"},{"id":412,"s":"There is a ______ smell coming from the kitchen; something must have gone bad.","zh":"厨房里传来一股令人讨厌的气味，肯定是什么东西坏了。","a":"nasty","cn":"令人讨厌的，糟糕的"},{"id":413,"s":"______ stay green even in the coldest winter.","zh":"即使在最冷的冬天，松树依然青翠。","a":"pine tree","cn":"松树"},{"id":414,"s":"That is ______ what I wanted to say.","zh":"那正是我想说的话。","a":"precisely","cn":"正是（表强调）"},{"id":415,"s":"______ tells the story of 108 heroes who gather in the mountains.","zh":"水浒传讲述了108位好汉聚义梁山的故事。","a":"The Water Margin","cn":"水浒传"},{"id":416,"s":"The firefighter made a ______ effort to save the child from the burning house.","zh":"那位消防员做出了英勇的努力，把孩子从着火的房子里救了出来。","a":"heroic","cn":"英雄的，英勇的"},{"id":417,"s":"This document is strictly ______.","zh":"这份文件是严格机密的。","a":"confidential","cn":"机密的"},{"id":418,"s":"The data is kept in a secure ______ facility.","zh":"这些数据被保存在安全的储存设施中。","a":"storage","cn":"储存"},{"id":419,"s":"The driver made a ______ mistake and crashed.","zh":"司机犯了一个致命的错误，导致了车祸。","a":"fatal","cn":"致命的"},{"id":420,"s":"There are ______ restaurants in this city.","zh":"这座城市里有种类繁多的餐馆。","a":"a large variety of","cn":"种类繁多"},{"id":421,"s":"He had to ______ all his strength to lift the box.","zh":"他不得不用尽全力才举起那个箱子。","a":"exert","cn":"运用，施加"},{"id":422,"s":"The ______ is known as the king of flowers in China.","zh":"牡丹在中国被称为花中之王。","a":"peony","cn":"牡丹"},{"id":423,"s":"She gave a ______ speech that won everyone over.","zh":"她发表了一场有说服力的演讲，说服了所有人。","a":"persuasive","cn":"有说服力的"},{"id":424,"s":"______ has become one of the most economically dynamic regions in China.","zh":"珠江三角洲已成为中国最具经济活力的地区之一。","a":"the Pearl River Delta","cn":"珠江三角洲"},{"id":425,"s":"______ is full of famous characters and battles.","zh":"三国演义充满了著名的人物和战役。","a":"The Romance of the Three Kingdoms","cn":"三国演义"},{"id":426,"s":"She ______ to finish the report by Friday.","zh":"她承诺在周五前完成报告。","a":"undertake","cn":"承担"},{"id":427,"s":"Hard work always brings its own ______.","zh":"努力总会带来回报。","a":"reward","cn":"回报"},{"id":428,"s":"The ______ in this area has risen over the past decade.","zh":"过去十年里这片地区的草地覆盖率有所上升。","a":"grass coverage rate","cn":"草地覆盖率"},{"id":429,"s":"There has been a gradual ______ in public opinion.","zh":"公众舆论出现了逐渐的转变。","a":"shift","cn":"转移，转化"},{"id":430,"s":"This chemical may ______ the growth of bacteria.","zh":"这种化学物质可能抑制细菌的生长。","a":"inhibit","cn":"抑制"},{"id":431,"s":"______ is a key part of rural development in China.","zh":"农业现代化是中国农村发展的关键一环。","a":"agricultural modernization","cn":"农业现代化"},{"id":432,"s":"The new phone has a much larger ______ than the old one.","zh":"新手机的续航能力比旧的大得多。","a":"battery capacity","cn":"续航能力"},{"id":433,"s":"His sudden silence ______ everyone at the meeting.","zh":"他突然的沉默使会上的每个人都感到迷惑。","a":"puzzle","cn":"使迷惑"},{"id":434,"s":"She twisted her ______ while running.","zh":"她跑步时扭伤了脚踝。","a":"ankle","cn":"脚踝"},{"id":435,"s":"The army began to ______ young volunteers.","zh":"军队开始招募年轻志愿者。","a":"recruit","cn":"招募"},{"id":436,"s":"Competition for the job was extremely ______.","zh":"这份工作的竞争极为激烈。","a":"fierce","cn":"强烈（凶猛、激烈）"},{"id":437,"s":"A long ______ of passengers formed outside the ticket office before dawn.","zh":"天亮前，售票处外排起了长长的乘客队伍。","a":"queue","cn":"队列"},{"id":438,"s":"The two cultures influence each other ______.","zh":"这两种文化在不同程度上相互影响。","a":"to different extents","cn":"不同程度上"},{"id":439,"s":"Soldiers fought bravely to ______ their country.","zh":"士兵们英勇作战以保卫国家。","a":"defend","cn":"防御"},{"id":440,"s":"These imported goods are clearly ______ to the ones made by local craftsmen.","zh":"这些进口货明显比当地工匠制作的差。","a":"inferior","cn":"次的，较差的"},{"id":441,"s":"The police came to ______ the thief.","zh":"警察来逮捕那个小偷。","a":"arrest","cn":"逮捕"},{"id":442,"s":"She worked hard to ______ her dream.","zh":"她努力工作以实现自己的梦想。","a":"fulfill","cn":"履行"},{"id":443,"s":"These boots are made of ______ leather that can withstand years of heavy use.","zh":"这双靴子由耐用的皮革制成，能经受多年高强度的使用。","a":"durable","cn":"耐用的，持久的"},{"id":444,"s":"Prices rose at a ______ rate last month.","zh":"上个月物价以陡峭（急剧）的速度上涨。","a":"steep","cn":"陡峭的"},{"id":445,"s":"Overfishing can ______ fish stocks in the ocean.","zh":"过度捕捞会大量消耗海洋里的鱼类资源。","a":"deplete","cn":"大量消耗"},{"id":446,"s":"People are affected by the new policy ______.","zh":"人们在不同程度上受到新政策的影响。","a":"to different extents","cn":"不同程度上"},{"id":447,"s":"She ______ the offer because the salary was too low.","zh":"她错过了这个工作机会，因为薪水太低。","a":"pass up","cn":"放弃，错过（机会）"},{"id":448,"s":"The company has become ______ in the local market.","zh":"这家公司已在当地市场占据支配地位。","a":"dominant","cn":"占支配地位的"},{"id":449,"s":"The family suffered ______ during the war, losing their home and everything they owned.","zh":"战争期间这家人遭受了无法用言语形容的痛苦，失去了家园和所有财产。","a":"unspeakably","cn":"无法被言语形容的"},{"id":450,"s":"Fear can ______ a person from taking risks.","zh":"恐惧会抑制一个人去冒险。","a":"inhibit","cn":"抑制"},{"id":451,"s":"The country has long attracted ______ from all over the world.","zh":"这个国家长期以来吸引着来自世界各地的迁入移民。","a":"immigrant","cn":"从外部迁入的移民"},{"id":452,"s":"It is ______ when people talk loudly in the library.","zh":"人们在图书馆里大声说话真令人烦躁。","a":"annoying","cn":"令人烦躁的"},{"id":453,"s":"A ______ storm hit the coast last night.","zh":"昨晚一场猛烈的风暴袭击了海岸。","a":"violent","cn":"暴力的"},{"id":454,"s":"The students' names were listed ______.","zh":"学生们的名字按数字顺序列出。","a":"in numerical order","cn":"按数字顺序"},{"id":455,"s":"Every company must follow government ______.","zh":"每家公司都必须遵守政府的规章制度。","a":"regulation","cn":"规章制度"},{"id":456,"s":"The river's ______ slows down near the sea.","zh":"河流在靠近大海处流速减慢。","a":"flow","cn":"流动"},{"id":457,"s":"Prices have risen ______ over the past five years, with no sudden jumps.","zh":"过去五年物价稳步上涨，没有出现突然的暴涨。","a":"steadily","cn":"稳步地，平稳地"},{"id":458,"s":"All ______ information must be kept in a safe.","zh":"所有机密信息都必须存放在保险箱里。","a":"confidential","cn":"机密的"},{"id":459,"s":"You should ______ your muscles before running to avoid injury.","zh":"跑步前你应该伸展肌肉，以免受伤。","a":"stretch","cn":"伸展，拉长"},{"id":460,"s":"We should not ______ the hardships of the past.","zh":"我们不应把过去的艰辛浪漫化。","a":"romanticize","cn":"浪漫化"},{"id":461,"s":"Modern telescopes are so ______ that they can detect light from distant galaxies.","zh":"现代望远镜如此精密，以至于能探测到遥远星系发出的光。","a":"sophisticated","cn":"精密的，复杂的（机器）"},{"id":462,"s":"Bread and potatoes are common ______ foods in the West.","zh":"面包和土豆是西方常见的主食。","a":"staple","cn":"主食"},{"id":463,"s":"Do not ______ old batteries with normal rubbish.","zh":"不要把旧电池和普通垃圾一起丢弃。","a":"discard","cn":"丢弃"},{"id":464,"s":"Regular exercise helps build strong ______.","zh":"规律的锻炼有助于强健肌肉。","a":"muscle","cn":"肌肉"},{"id":465,"s":"Please put a ______ on the envelope before mailing it.","zh":"寄信前请在信封上贴一张邮票。","a":"stamp","cn":"邮票"},{"id":466,"s":"She studied hard to ______ as a doctor.","zh":"她努力学习以取得医生资格。","a":"qualify","cn":"有资格去做"},{"id":467,"s":"Do not ______ the speed limit while driving.","zh":"开车时不要超过限速。","a":"exceed","cn":"超过"},{"id":468,"s":"The novel is praised for its honest ______.","zh":"这部小说因其诚实的现实主义而受到赞誉。","a":"realism","cn":"现实主义"},{"id":469,"s":"She put the pot on the ______ to cook soup.","zh":"她把锅放在炉子上煮汤。","a":"stove","cn":"炉子"},{"id":470,"s":"Gas began to ______ from the broken pipe.","zh":"气体开始从破裂的管道中泄漏。","a":"leak","cn":"泄漏"},{"id":471,"s":"It took the company two years to ______ the safety regulations across all its branches.","zh":"这家公司花了两年时间才在所有分支机构出台这些安全规定。","a":"implement","cn":"出台"},{"id":472,"s":"Many films tend to ______ country life.","zh":"许多电影倾向于把乡村生活浪漫化。","a":"romanticize","cn":"浪漫化"},{"id":473,"s":"Players argued with the ______ about the decision.","zh":"球员们就判罚与裁判争论。","a":"referee","cn":"裁判"},{"id":474,"s":"This is the latest ______ of the software.","zh":"这是该软件的最新版本。","a":"version","cn":"版本"},{"id":475,"s":"Water collected in the ______ after the heavy rain.","zh":"大雨过后，水积聚在盆地里。","a":"basin","cn":"盆地"},{"id":476,"s":"It took me a while to ______ the main idea.","zh":"我花了一会儿才领悟大意。","a":"grasp","cn":"把握，抓紧"},{"id":477,"s":"His argument was clear and ______.","zh":"他的论点清晰而有说服力。","a":"persuasive","cn":"有说服力的"}];
+const ROUND = 20, ROUND_CLOZE = 10;
 const LS_SRS = 'vocab_srs_v1', LS_DAY = 'vocab_day_v1';
 
 /* ---------- storage ---------- */
@@ -225,15 +237,17 @@ function saveDay(d){ try{ localStorage.setItem(LS_DAY, JSON.stringify(d)) }catch
 let srs = loadSrs();
 let day = loadDay();
 
-const box = w => { const r = srs[w.id]; if(!r) return 0; return r.box|0; };
-const isWrong = w => { const r = srs[w.id]; return r && r.box < 0; };
+const keyOf = it => it.kind === 'cloze' ? 'c' + it.id : String(it.id);
+const box = it => { const r = srs[keyOf(it)]; if(!r) return 0; return r.box|0; };
+const isWrong = it => { const r = srs[keyOf(it)]; return !!r && r.box < 0; };
 
-function record(w, ok){
-  const r = srs[w.id] || {box:0, ok:0, bad:0, last:0};
+function record(it, ok){
+  const k = keyOf(it);
+  const r = srs[k] || {box:0, ok:0, bad:0, last:0};
   r.last = Date.now();
-  if(ok){ r.ok++; r.box = Math.min(3, (r.box<0?0:r.box) + 1); }
+  if(ok){ r.ok++; r.box = Math.min(3, (r.box < 0 ? 0 : r.box) + 1); }
   else { r.bad++; r.box = -1; }
-  srs[w.id] = r;
+  srs[k] = r;
   saveSrs(srs);
   day.n++; if(ok) day.ok++;
   saveDay(day);
@@ -241,100 +255,140 @@ function record(w, ok){
 
 /* ---------- helpers ---------- */
 const $ = s => document.querySelector(s);
-const norm = s => s.toLowerCase().replace(/[’']/g,"'").replace(/[.,;:!?！，。；：]/g,'').replace(/\s+/g,' ').trim();
+const norm = s => String(s).toLowerCase().replace(/[’']/g,"'").replace(/[.,;:!?！，。；：]/g,'').replace(/\s+/g,' ').trim();
 function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a }
 function pick(arr,n){ return shuffle(arr.slice()).slice(0,n) }
+function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 function refreshHome(){
-  const total = WORDS.length;
-  const mastered = WORDS.filter(w=>box(w)>=3).length;
-  const wrong = WORDS.filter(isWrong).length;
-  $('#sTotal').textContent = total;
+  const mastered = WORDS.filter(w=>box({kind:'word',id:w.id})>=3).length;
+  const wrongW = WORDS.filter(w=>isWrong({kind:'word',id:w.id})).length;
+  const wrongC = CLOZE.filter(c=>isWrong({kind:'cloze',id:c.id})).length;
+  $('#sTotal').textContent = WORDS.length;
   $('#sMastered').textContent = mastered;
-  $('#sWrong').textContent = wrong;
-  $('#wrongSub').textContent = wrong ? `复习 ${wrong} 个做错过的词` : '暂时没有错题，太强了';
-  const before = Math.floor(day.n / 30 * 100);
+  $('#sWrong').textContent = wrongW + wrongC;
+  const wrong = wrongW + wrongC;
+  $('#wrongSub').textContent = wrong ? `复习 ${wrong} 道做错过的题` : '暂时没有错题，太强了';
+  $('#clozeCount').textContent = CLOZE.length + ' 句';
   $('#todayDone').textContent = day.n;
   $('#todayAcc').textContent = day.n ? Math.round(day.ok/day.n*100) + '%' : '—';
-  $('#todayBar').style.width = Math.min(100, before) + '%';
+  $('#todayBar').style.width = Math.min(100, Math.floor(day.n / 30 * 100)) + '%';
+}
+
+/* ---------- 出题 ---------- */
+const wordItems = () => WORDS.map(w=>({kind:'word', id:w.id, cn:w.cn, en:w.en, pos:w.pos}));
+const clozeItems = () => CLOZE.map(c=>({kind:'cloze', id:c.id, s:c.s, zh:c.zh, a:c.a, cn:c.cn}));
+
+function weight(it){
+  const r = srs[keyOf(it)];
+  let s = Math.random();
+  if(!r) s += 1.2;
+  else if(r.box < 0) s += 1.6;
+  else s += (3 - Math.min(3, r.box)) * 0.6;
+  return s;
+}
+function takeTop(pool, n){
+  return pool.map(it=>[weight(it), it]).sort((a,b)=>b[0]-a[0]).slice(0, n).map(x=>x[1]);
+}
+
+function buildRound(mode){
+  if(mode === 'wrong'){
+    const pool = [...wordItems(), ...clozeItems()].filter(isWrong);
+    if(!pool.length) return null;
+    return shuffle(pool).slice(0, 30);
+  }
+  if(mode === 'cloze' || mode === 'clozeC'){
+    return takeTop(clozeItems(), ROUND_CLOZE);
+  }
+  return takeTop(wordItems(), ROUND);
 }
 
 /* ---------- quiz ---------- */
-let Q = null; // {list, i, mode, ok, bad, wrongs}
-
-function pickWords(mode, n){
-  if(mode === 'wrong'){
-    const pool = WORDS.filter(isWrong);
-    if(!pool.length) return null;
-    return shuffle(pool).slice(0, Math.min(n, pool.length));
-  }
-  // weight: unmastered first, wrong ones a bit higher
-  const scored = WORDS.map(w=>{
-    const r = srs[w.id];
-    let s = Math.random();
-    if(!r) s += 1.2;
-    else if(r.box < 0) s += 1.6;
-    else s += (3 - Math.min(3,r.box)) * 0.6;
-    return [s, w];
-  }).sort((a,b)=>b[0]-a[0]);
-  return scored.slice(0, n).map(x=>x[1]);
-}
+let Q = null;
 
 function startQuiz(mode){
-  const n = mode === 'wrong' ? 30 : ROUND;
-  const list = pickWords(mode, n);
+  const list = buildRound(mode);
   if(!list){ alert('还没有错题，先去练几轮吧～'); return }
   Q = {list, i:0, mode, ok:0, bad:0, wrongs:[]};
   show('quiz');
   renderQ();
 }
 
-function questionType(mode, w){
+function questionType(mode, it){
+  if(it.kind === 'cloze') return Math.random() < 0.5 ? 'cloze' : 'clozeC';
   if(mode === 'mix' || mode === 'wrong') return ['cn2en','en2cn','spell'][Math.floor(Math.random()*3)];
   return mode;
 }
 
 function renderQ(){
-  const w = Q.list[Q.i];
-  const type = questionType(Q.mode, w);
-  Q.cur = {type, w};
+  const it = Q.list[Q.i];
+  const type = questionType(Q.mode, it);
+  Q.cur = {type, it};
   $('#qBar').style.width = (Q.i / Q.list.length * 100) + '%';
   $('#qCount').textContent = `${Q.i+1}/${Q.list.length}`;
   $('#qFb').className = 'feedback';
+  $('#qFb').innerHTML = '';
   $('#qNextRow').classList.add('hidden');
   $('#qSpeakWrap').innerHTML = '';
+  $('#qZh').classList.add('hidden');
+  $('#qZh').textContent = '';
   $('#qInput').value = '';
   $('#qInput').className = 'type';
   $('#qInput').disabled = false;
-
+  $('#btnSkip').classList.remove('hidden');
   const opts = $('#qOpts');
   opts.innerHTML = '';
+  opts.classList.add('hidden');
   $('#qTyping').classList.add('hidden');
+  $('#qText').className = 'qtext';
 
   if(type === 'cn2en'){
-    $('#qLabel').textContent = '选择英文' + (w.pos? ' · '+w.pos : '');
-    $('#qText').textContent = w.cn;
-    $('#qText').className = 'qtext';
+    $('#qLabel').textContent = '选择英文' + (it.pos ? ' · ' + it.pos : '');
+    $('#qText').textContent = it.cn;
     $('#qHint').textContent = '';
-    buildOptions(w, w.en, x=>x.en);
     opts.classList.remove('hidden');
-  } else if(type === 'en2cn'){
+    buildOptions(it, it.en, x=>x.en);
+    return;
+  }
+  if(type === 'en2cn'){
     $('#qLabel').textContent = '选择含义';
-    $('#qText').textContent = w.en;
+    $('#qText').textContent = it.en;
     $('#qText').className = 'qtext en';
     $('#qHint').textContent = '';
-    buildOptions(w, w.cn, x=>x.cn);
     opts.classList.remove('hidden');
-    speakBtn(w.en);
-  } else {
-    $('#qLabel').textContent = '拼写' + (w.pos? ' · '+w.pos : '');
-    $('#qText').textContent = w.cn;
-    $('#qText').className = 'qtext';
-    $('#qHint').textContent = '';
-    opts.classList.add('hidden');
-    $('#qTyping').classList.remove('hidden');
-    setTimeout(()=>$('#qInput').focus(), 120);
+    buildOptions(it, it.cn, x=>x.cn);
+    speakBtn(it.en);
+    return;
   }
+  if(type === 'spell'){
+    $('#qLabel').textContent = '拼写' + (it.pos ? ' · ' + it.pos : '');
+    $('#qText').textContent = it.cn;
+    $('#qHint').textContent = '';
+    return startTyping();
+  }
+  if(type === 'cloze' || type === 'clozeC'){
+    $('#qLabel').textContent = type === 'cloze' ? '句子挖空 · 填空' : '句子挖空 · 选择';
+    $('#qText').className = 'qtext sent';
+    $('#qText').innerHTML = escapeHtml(it.s).replace(/_{3,}/, type === 'cloze'
+      ? '<span class="blank">blank</span>'
+      : '<span class="blank">blank</span>');
+    $('#qZh').classList.remove('hidden');
+    $('#qZh').textContent = it.zh ? '【中文】' + it.zh : `【词义】${it.cn || ''}`;
+    $('#qHint').textContent = '';
+    if(type === 'clozeC'){
+      opts.classList.remove('hidden');
+      buildOptions(it, it.a, x=>x.a, 'cloze');
+    } else {
+      startTyping();
+    }
+    return;
+  }
+}
+
+function startTyping(){
+  $('#qTyping').classList.remove('hidden');
+  $('#qText').classList.remove('hidden');
+  setTimeout(()=>{ try{ $('#qInput').focus() }catch(e){} }, 120);
 }
 
 function speakBtn(text){
@@ -351,31 +405,55 @@ function speak(text){
   }catch(e){}
 }
 
-function buildOptions(w, correct, get){
+function buildOptions(it, correct, get, kind){
   const opts = $('#qOpts');
-  const pool = WORDS.filter(x=>x.id!==w.id);
-  // prefer same-ish length options for plausible distractors
+  const pool = (kind === 'cloze' ? clozeItems() : wordItems()).filter(x => keyOf(x) !== keyOf(it));
   const sorted = pool.sort((a,b)=>Math.abs(get(a).length-correct.length)-Math.abs(get(b).length-correct.length));
-  const near = sorted.slice(0, 60);
+  const near = sorted.slice(0, 80);
   const distract = [];
   const used = new Set([correct]);
-  for(const x of pick(near, 30)){
+  for(const x of pick(near, 40)){
     const v = get(x);
     if(!v || used.has(v)) continue;
     used.add(v); distract.push(v);
-    if(distract.length===3) break;
+    if(distract.length === 3) break;
   }
   const all = shuffle([correct, ...distract]);
-  all.forEach((v,idx)=>{
+  all.forEach((v, idx)=>{
     const b = document.createElement('button');
     b.className = 'opt';
-    b.innerHTML = `<span>${v}</span><span class="k">${idx+1}</span>`;
-    b.onclick = ()=>answerChoice(b, v, correct, w);
+    b.innerHTML = `<span>${escapeHtml(v)}</span><span class="k">${idx+1}</span>`;
+    b.onclick = ()=>answerChoice(b, v, correct, it);
     opts.appendChild(b);
   });
 }
 
-function answerChoice(el, v, correct, w){
+/* 宽松匹配：允许大小写、标点、以及词形变化（时态/单复数） */
+function matchTyped(input, answer){
+  const v = norm(input), a = norm(answer);
+  if(!v) return false;
+  if(v === a) return true;
+  const strip = s => s.replace(/^the\s+/, '');
+  if(strip(v) === strip(a)) return true;
+  const forms = s => {
+    const out = new Set([s, s+'s', s+'es', s+'ed', s+'d', s+'ing', s+'ly']);
+    if(/e$/.test(s)) out.add(s.slice(0,-1)+'ing');
+    if(/y$/.test(s)){ out.add(s.slice(0,-1)+'ies'); out.add(s.slice(0,-1)+'ied'); }
+    if(/[^aeiou]y$/.test(s)) out.add(s.slice(0,-1)+'ier');
+    return out;
+  };
+  if(forms(a).has(v)) return true;
+  // 多词短语：只比较最后一个词
+  if(a.includes(' ') && v.includes(' ')){
+    const aa = a.split(' '), vv = v.split(' ');
+    if(aa.length === vv.length && aa.slice(0,-1).join(' ') === vv.slice(0,-1).join(' ')){
+      return forms(aa[aa.length-1]).has(vv[vv.length-1]);
+    }
+  }
+  return false;
+}
+
+function answerChoice(el, v, correct, it){
   const opts = [...$('#qOpts').children];
   if(opts.some(o=>o.disabled)) return;
   const ok = norm(v) === norm(correct);
@@ -386,25 +464,36 @@ function answerChoice(el, v, correct, w){
     else if(o === el) o.classList.add('bad');
     else o.classList.add('dim');
   });
-  afterAnswer(ok, w);
+  afterAnswer(ok, it);
 }
 
-function afterAnswer(ok, w){
-  record(w, ok);
-  if(ok) Q.ok++; else { Q.bad++; Q.wrongs.push(w); }
+function fillSentence(s, ans){
+  return escapeHtml(s).replace(/_{3,}/, `<span class="filled">${escapeHtml(ans)}</span>`);
+}
+
+function afterAnswer(ok, it){
+  record(it, ok);
+  if(ok) Q.ok++; else { Q.bad++; Q.wrongs.push(it); }
   const fb = $('#qFb');
-  fb.className = 'feedback show ' + (ok ? 'good':'wrong');
-  fb.innerHTML = ok
-    ? `<b>✓ 正确</b>${w.cn} — ${w.en}`
-    : `<b>✕ 再记一次</b>${w.cn} — <b>${w.en}</b>`;
-  if(!ok) speak(w.en);
+  fb.className = 'feedback show ' + (ok ? 'good' : 'wrong');
+
+  if(it.kind === 'cloze'){
+    fb.innerHTML = (ok ? '<b>✓ 正确</b>' : '<b>✕ 再记一次</b>')
+      + `<div class="fsent">${fillSentence(it.s, it.a)}</div>`
+      + `<div class="fsent" style="color:var(--text2);font-family:inherit;font-size:13px">${escapeHtml(it.a)} — ${escapeHtml(it.cn||'')}</div>`;
+    if(!ok) speak(it.a);
+  } else {
+    fb.innerHTML = ok
+      ? `<b>✓ 正确</b>${escapeHtml(it.cn)} — ${escapeHtml(it.en)}`
+      : `<b>✕ 再记一次</b>${escapeHtml(it.cn)} — <b>${escapeHtml(it.en)}</b>`;
+    if(!ok) speak(it.en);
+  }
   $('#qNextRow').classList.remove('hidden');
   $('#btnSkip').classList.add('hidden');
 }
 
 function nextQ(){
   Q.i++;
-  $('#btnSkip').classList.remove('hidden');
   if(Q.i >= Q.list.length) finish(); else renderQ();
 }
 
@@ -416,44 +505,53 @@ function finish(){
   $('#doneEmoji').textContent = Q.bad === 0 ? '🏆' : (Q.ok >= Q.bad ? '💪' : '📚');
   $('#doneTitle').textContent = Q.bad === 0 ? '全对，稳！' : '这一轮完成';
   $('#doneText').textContent = Q.bad === 0
-    ? `这 ${total} 个词你已经很熟了，继续保持。`
-    : `做错 ${Q.bad} 个，已经收进错题本，晚点再过一遍。`;
-  const wl = Q.wrongs.length
-    ? '<h2 style="margin-top:6px">本轮错题</h2>' + Q.wrongs.map(w=>
-        `<div class="wrow"><span class="cn">${w.cn}</span><span class="en">${w.en}</span></div>`).join('')
+    ? `这 ${total} 题你已经很熟了，继续保持。`
+    : `做错 ${Q.bad} 道，已经收进错题本，晚点再过一遍。`;
+  $('#dWrongList').innerHTML = Q.wrongs.length
+    ? '<h2 style="margin-top:6px">本轮错题</h2>' + Q.wrongs.map(it=> it.kind === 'cloze'
+        ? `<div class="wrow"><span class="cn" style="font-size:12.5px">${escapeHtml(it.s.replace(/_{3,}/,'__'))}</span><span class="en">${escapeHtml(it.a)}</span></div>`
+        : `<div class="wrow"><span class="cn">${escapeHtml(it.cn)}</span><span class="en">${escapeHtml(it.en)}</span></div>`).join('')
     : '';
-  $('#dWrongList').innerHTML = wl;
   refreshHome();
   show('done');
 }
 
 /* ---------- events ---------- */
 $('#btnSubmit').onclick = ()=>{
-  const w = Q.cur.w;
+  const {it, type} = Q.cur;
   const val = $('#qInput').value;
   if(!val.trim()) return;
-  const ok = norm(val) === norm(w.en);
+  const answer = type === 'spell' ? it.en : it.a;
+  const ok = type === 'spell' ? (norm(val) === norm(it.en)) : matchTyped(val, it.a);
   $('#qInput').disabled = true;
-  $('#qInput').className = 'type ' + (ok ? 'ok':'bad');
-  afterAnswer(ok, w);
+  $('#qInput').className = 'type ' + (ok ? 'ok' : 'bad');
+  afterAnswer(ok, it);
 };
 $('#qInput').addEventListener('keydown', e=>{ if(e.key === 'Enter'){ e.preventDefault(); $('#btnSubmit').click() } });
 $('#btnHint').onclick = ()=>{
-  const en = Q.cur.w.en;
-  const shown = en.split(' ').map((part,i)=> i===0 ? part.slice(0, Math.max(2, Math.ceil(part.length/3))) + '…' : '…').join(' ');
-  $('#qHint').textContent = shown + `（${en.replace(/[^A-Za-z]/g,'').length} 个字母）`;
+  const {it, type} = Q.cur;
+  if(type === 'spell'){
+    const en = it.en;
+    const shown = en.split(' ').map((part,i)=> i===0 ? part.slice(0, Math.max(2, Math.ceil(part.length/3))) + '…' : '…').join(' ');
+    $('#qHint').textContent = shown + `（${en.replace(/[^A-Za-z]/g,'').length} 个字母）`;
+  } else {
+    const a = it.a;
+    $('#qHint').textContent = a.split(' ').map(w=> w[0] + '·'.repeat(Math.max(1, w.length-1))).join(' ')
+      + `（${a.replace(/[^A-Za-z]/g,'').length} 个字母）`;
+  }
 };
 $('#btnNext').onclick = nextQ;
 $('#btnSkip').onclick = ()=>{
-  const w = Q.cur.w;
-  record(w, false);
-  Q.bad++; Q.wrongs.push(w);
+  const it = Q.cur.it;
+  record(it, false);
+  Q.bad++; Q.wrongs.push(it);
   nextQ();
 };
-$('#btnQuit').onclick = ()=>{ if(confirm('结束这一轮？')) { finish(); } };
+$('#btnQuit').onclick = ()=>{ if(confirm('结束这一轮？')) finish(); };
 $('#btnHome').onclick = ()=>show('home');
-$('#btnAgain').onclick = ()=>{ startQuiz(Q.mode) };
+$('#btnAgain').onclick = ()=>startQuiz(Q.mode);
 document.querySelectorAll('[data-start]').forEach(b=>b.onclick = ()=>startQuiz(b.dataset.start));
+
 function setTheme(dark){
   document.documentElement.classList.toggle('dark', dark);
   document.querySelector('meta[name=theme-color]').setAttribute('content', dark ? '#111110' : '#f7f6f3');
@@ -465,6 +563,7 @@ $('#btnTheme').onclick = ()=>setTheme(!document.documentElement.classList.contai
   if(pref) setTheme(pref==='dark');
   else setTheme(!!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches));
 })();
+
 document.querySelectorAll('[data-nav]').forEach(b=>b.onclick = ()=>{
   document.querySelectorAll('[data-nav]').forEach(x=>x.classList.toggle('on', x===b));
   if(b.dataset.nav === 'list'){ show('list'); renderList(); } else show('home');
@@ -481,22 +580,21 @@ function renderList(){
   const q = ($('#searchBox').value||'').trim().toLowerCase();
   const rows = WORDS.filter(w=>!q || w.cn.toLowerCase().includes(q) || w.en.toLowerCase().includes(q));
   $('#wordList').innerHTML = rows.map(w=>{
-    const b = box(w);
+    const b = box({kind:'word', id:w.id});
     const cls = b<0 ? 'bad' : ('b'+Math.min(3,b));
     return `<div class="wrow">
       <span class="dot ${cls}"></span>
-      <span class="cn">${w.cn}${w.pos?`<span class="pill">${w.pos}</span>`:''}</span>
-      <span class="en">${w.en}</span>
-      <button class="speak" data-say="${w.en.replace(/"/g,'&quot;')}">🔊</button>
+      <span class="cn">${escapeHtml(w.cn)}${w.pos?`<span class="pill">${w.pos}</span>`:''}</span>
+      <span class="en">${escapeHtml(w.en)}</span>
+      <button class="speak" data-say="${escapeHtml(w.en)}">🔊</button>
     </div>`;
   }).join('') || '<p class="sub center">没找到</p>';
   document.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>speak(b.dataset.say));
 }
-$('#searchBox').addEventListener('input', ()=>{ if(WORDS.length<400) renderList(); });
+$('#searchBox').addEventListener('input', renderList);
 
 refreshHome();
 </script>
-
 <script>
 if ('serviceWorker' in navigator && location.protocol === 'https:') {
   navigator.serviceWorker.register('sw.js').catch(()=>{});
