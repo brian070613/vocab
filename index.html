@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#f7f6f3">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-title" content="单词闯关">
+<title>单词闯关 · 我的词汇本</title>
+<style>
+:root{
+  --bg:#f7f6f3; --card:#ffffff; --text:#1c1c1c; --text2:#6a6a6a; --text3:#a09c93;
+  --line:#e6e3dc; --gold:#bd8b2b; --gold-dim:#97701f;
+  --ok:#2f8f5b; --ok-bg:#eaf5ee; --bad:#c2453c; --bad-bg:#fbeceb;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);
+  --r:16px;
+}
+html.dark{
+    --bg:#111110; --card:#1b1b1a; --text:#f0eee9; --text2:#a3a09a; --text3:#6f6c66;
+    --line:#2c2c2a; --gold:#d9a94e; --gold-dim:#c2953f;
+    --ok:#5cc98a; --ok-bg:#16281d; --bad:#ef8079; --bad-bg:#2a1917;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:16px; line-height:1.5;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) calc(env(safe-area-inset-bottom) + 84px) env(safe-area-inset-left);
+  transition:background .2s,color .2s;
+  overscroll-behavior-y:contain;
+}
+.wrap{max-width:560px;margin:0 auto;padding:18px 18px 0}
+header{display:flex;align-items:center;justify-content:space-between;padding:8px 0 14px}
+.brand{font-weight:700;letter-spacing:.5px}
+.brand small{display:block;font-weight:400;font-size:11px;color:var(--text3);letter-spacing:1.5px}
+.iconbtn{border:none;background:var(--card);color:var(--text2);width:38px;height:38px;border-radius:12px;font-size:16px;box-shadow:var(--shadow);cursor:pointer}
+h2{font-size:15px;margin:0 0 10px;color:var(--text2);font-weight:600;letter-spacing:.3px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:18px}
+.hero{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.stat{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 10px;text-align:center}
+.stat b{display:block;font-size:22px;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.stat span{font-size:11px;color:var(--text3);letter-spacing:.5px}
+.modes{display:grid;gap:10px;margin-bottom:22px}
+.mode{display:flex;align-items:center;gap:14px;background:var(--card);border:none;border-radius:var(--r);
+  padding:16px;text-align:left;box-shadow:var(--shadow);cursor:pointer;color:var(--text);width:100%;font-size:15px;
+  transition:transform .12s ease}
+.mode:active{transform:scale(.985)}
+.mode .em{font-size:22px;width:34px;text-align:center;flex:none}
+.mode b{display:block;font-size:15px;font-weight:600}
+.mode i{display:block;font-style:normal;font-size:12px;color:var(--text3);margin-top:2px}
+.mode .arrow{margin-left:auto;color:var(--text3);font-size:18px}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-dim));width:0;transition:width .3s}
+/* quiz */
+.quiztop{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.quiztop .bar{flex:1}
+.counter{font-size:12px;color:var(--text3);font-variant-numeric:tabular-nums}
+.qcard{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:26px 20px;text-align:center;margin-bottom:16px;min-height:150px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.qlabel{font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;font-weight:600}
+.qtext{font-size:27px;font-weight:650;line-height:1.35;word-break:break-word}
+.qtext.en{font-family:Georgia,"Times New Roman",serif;font-weight:600}
+.qhint{font-size:13px;color:var(--text3);font-family:ui-monospace,Menlo,monospace;letter-spacing:1px}
+.opts{display:grid;gap:10px}
+.opt{position:relative;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:15px 44px 15px 16px;
+  font-size:16px;text-align:left;color:var(--text);cursor:pointer;transition:all .15s;width:100%;font-family:inherit;
+  box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.opt .k{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--text3);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.opt:active{transform:scale(.99)}
+.opt.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:600}
+.opt.bad{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+.opt:disabled{cursor:default;opacity:.95}
+.opt.dim{opacity:.45}
+.feedback{margin-top:14px;border-radius:14px;padding:14px 16px;font-size:14px;display:none}
+.feedback.show{display:block;animation:pop .2s ease}
+.feedback.good{background:var(--ok-bg);color:var(--ok)}
+.feedback.wrong{background:var(--bad-bg);color:var(--bad)}
+.feedback b{display:block;font-size:17px;margin-bottom:2px}
+@keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.row{display:flex;gap:10px;margin-top:16px}
+.btn{flex:1;border:none;border-radius:14px;padding:15px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;
+  background:var(--card);color:var(--text);box-shadow:var(--shadow)}
+.btn.primary{background:var(--gold);color:#fff;box-shadow:0 6px 18px rgba(189,139,43,.28)}
+.btn.ghost{background:transparent;box-shadow:none;color:var(--text2);border:1.5px solid var(--line)}
+.btn:active{transform:scale(.99)}
+input.type{width:100%;border:1.5px solid var(--line);background:var(--card);color:var(--text);border-radius:14px;padding:16px;
+  font-size:19px;font-family:Georgia,serif;text-align:center;letter-spacing:.5px;outline:none;transition:border-color .15s}
+input.type:focus{border-color:var(--gold)}
+input.type.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+input.type.bad{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+.speak{border:none;background:transparent;color:var(--gold);font-size:20px;cursor:pointer;padding:4px 8px}
+.mini{font-size:12px;color:var(--text3);text-align:center;margin-top:10px}
+/* list */
+.search{width:100%;border:none;background:var(--card);border-radius:14px;padding:14px 16px;font-size:15px;color:var(--text);
+  box-shadow:var(--shadow);outline:none;margin-bottom:14px;font-family:inherit}
+.wrow{display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid var(--line)}
+.wrow:last-child{border-bottom:none}
+.wrow .cn{font-size:14px;color:var(--text2);flex:1;min-width:0}
+.wrow .en{font-family:Georgia,serif;font-size:16px;font-weight:600;text-align:right;word-break:break-word}
+.dot{width:7px;height:7px;border-radius:50%;flex:none;background:var(--line)}
+.dot.b1{background:#e0b86a}.dot.b2{background:#a8c48a}.dot.b3{background:var(--ok)}
+.dot.bad{background:var(--bad)}
+/* nav */
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;pointer-events:none;padding-bottom:env(safe-area-inset-bottom)}
+.navbox{pointer-events:auto;display:flex;gap:4px;background:var(--card);border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.13);
+  padding:7px;margin-bottom:12px;border:1px solid var(--line)}
+.navbox button{border:none;background:transparent;color:var(--text3);font-size:11px;padding:8px 14px;border-radius:14px;cursor:pointer;font-family:inherit;line-height:1.2}
+.navbox button.on{background:var(--bg);color:var(--gold-dim);font-weight:600}
+.navbox button span{display:block;font-size:17px;margin-bottom:1px}
+.hidden{display:none!important}
+.center{text-align:center}
+.big{font-size:44px;margin:4px 0}
+.sub{color:var(--text2);font-size:14px}
+.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:var(--bg);color:var(--text3);border:1px solid var(--line);margin-left:6px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">单词闯关<small id="hdrsub">AN EN · 词汇本</small></div>
+    <button class="iconbtn" id="btnTheme" title="切换主题">◐</button>
+  </header>
+
+  <!-- HOME -->
+  <section id="vHome">
+    <div class="hero">
+      <div class="stat"><b id="sTotal">0</b><span>总词数</span></div>
+      <div class="stat"><b id="sMastered">0</b><span>已掌握</span></div>
+      <div class="stat"><b id="sWrong">0</b><span>错题待复习</span></div>
+    </div>
+    <h2>开始练习</h2>
+    <div class="modes">
+      <button class="mode" data-start="mix"><span class="em">🎯</span><span><b>混合闯关</b><i>中译英 + 英译中 + 拼写，20 题一轮</i></span><span class="arrow">›</span></button>
+      <button class="mode" data-start="cn2en"><span class="em">🇨🇳</span><span><b>中译英 · 选择题</b><i>看中文，选英文</i></span><span class="arrow">›</span></button>
+      <button class="mode" data-start="en2cn"><span class="em">🇬🇧</span><span><b>英译中 · 选择题</b><i>看英文，选含义</i></span><span class="arrow">›</span></button>
+      <button class="mode" data-start="spell"><span class="em">⌨️</span><span><b>拼写挑战</b><i>看中文，把英文敲出来</i></span><span class="arrow">›</span></button>
+      <button class="mode" data-start="wrong"><span class="em">🔁</span><span><b>错题重练</b><i id="wrongSub">复习做错过的词</i></span><span class="arrow">›</span></button>
+    </div>
+    <h2>今日</h2>
+    <div class="card" style="margin-bottom:20px">
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:8px">
+        <span>今天已做 <b id="todayDone">0</b> 题</span><span>正确率 <b id="todayAcc">—</b></span>
+      </div>
+      <div class="bar"><i id="todayBar"></i></div>
+      <div class="mini" style="text-align:left;margin-top:10px">目标 30 题 / 天</div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="vQuiz" class="hidden">
+    <div class="quiztop">
+      <button class="iconbtn" id="btnQuit" title="结束">✕</button>
+      <div class="bar"><i id="qBar"></i></div>
+      <div class="counter" id="qCount">1/20</div>
+    </div>
+    <div class="qcard">
+      <div class="qlabel" id="qLabel">中译英</div>
+      <div class="qtext" id="qText">—</div>
+      <div class="qhint" id="qHint"></div>
+      <div id="qSpeakWrap"></div>
+    </div>
+    <div class="opts" id="qOpts"></div>
+    <div id="qTyping" class="hidden">
+      <input class="type" id="qInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="输入英文…">
+      <div class="row">
+        <button class="btn ghost" id="btnHint">提示</button>
+        <button class="btn primary" id="btnSubmit">提交</button>
+      </div>
+    </div>
+    <div class="feedback" id="qFb"></div>
+    <div class="row hidden" id="qNextRow"><button class="btn primary" id="btnNext">下一题</button></div>
+    <div class="row"><button class="btn ghost" id="btnSkip">跳过</button></div>
+  </section>
+
+  <!-- DONE -->
+  <section id="vDone" class="hidden center">
+    <div class="card" style="margin-top:30px">
+      <div class="big" id="doneEmoji">🎉</div>
+      <h2 style="font-size:20px;color:var(--text);margin-bottom:6px" id="doneTitle">这一轮完成</h2>
+      <p class="sub" id="doneText">—</p>
+      <div class="hero" style="margin:18px 0 4px">
+        <div class="stat" style="box-shadow:none;background:var(--bg)"><b id="dOk">0</b><span>答对</span></div>
+        <div class="stat" style="box-shadow:none;background:var(--bg)"><b id="dBad">0</b><span>答错</span></div>
+        <div class="stat" style="box-shadow:none;background:var(--bg)"><b id="dAcc">0%</b><span>正确率</span></div>
+      </div>
+      <div id="dWrongList" style="text-align:left;margin-top:14px"></div>
+      <div class="row" style="margin-top:18px">
+        <button class="btn ghost" id="btnHome">回到首页</button>
+        <button class="btn primary" id="btnAgain">再来一轮</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIST -->
+  <section id="vList" class="hidden">
+    <input class="search" id="searchBox" placeholder="搜索中文或英文…">
+    <div id="wordList"></div>
+  </section>
+</div>
+
+<nav><div class="navbox">
+  <button data-nav="home" class="on"><span>🏠</span>练习</button>
+  <button data-nav="list"><span>📖</span>词表</button>
+</div></nav>
+
+<script>
+const WORDS = [{"id":0,"cn":"外来务工者","en":"emigrant workers","pos":""},{"id":1,"cn":"候鸟迁徙路线","en":"the migration of migratory bird","pos":""},{"id":2,"cn":"北斗卫星导航系统","en":"The Beidou Satellite Navigation System","pos":""},{"id":3,"cn":"珠江三角洲","en":"The Pearl River Delta","pos":""},{"id":4,"cn":"海上丝绸之路","en":"The Maritime Silk Road","pos":""},{"id":5,"cn":"孔夫子","en":"Confucius","pos":""},{"id":6,"cn":"改革开放","en":"The Reform and Opening-up","pos":""},{"id":7,"cn":"中国特色社会主义道路","en":"the socialist path with Chinese charateristics","pos":""},{"id":8,"cn":"脱贫攻坚","en":"poverty alleviation","pos":""},{"id":9,"cn":"巧妇难为无米之炊","en":"It is impossible for a professional cook to make a meal without rice","pos":""},{"id":10,"cn":"梅花","en":"plum blossom","pos":""},{"id":11,"cn":"牡丹","en":"peony","pos":""},{"id":12,"cn":"少数民族","en":"ethic group","pos":""},{"id":13,"cn":"命名","en":"designate","pos":""},{"id":14,"cn":"从外部迁入的移民","en":"immigrant","pos":""},{"id":15,"cn":"从内部迁出的移民","en":"emigrant","pos":""},{"id":16,"cn":"进口汽车","en":"foreign-made automobiles/vehicles","pos":""},{"id":17,"cn":"进口的","en":"internationally-produced","pos":""},{"id":18,"cn":"农业现代化","en":"agriculture modernization","pos":""},{"id":19,"cn":"医疗保健","en":"medical healthcare","pos":""},{"id":20,"cn":"巨大的","en":"tremendous","pos":""},{"id":21,"cn":"中国四大名著","en":"Four Great Classical Novel of China","pos":""},{"id":22,"cn":"水浒传","en":"The Water Margin","pos":""},{"id":23,"cn":"红楼梦","en":"A Dream of Red Mansion","pos":""},{"id":24,"cn":"三国演义","en":"The Romance of Three Kingdoms","pos":""},{"id":25,"cn":"名人","en":"celebrity","pos":""},{"id":26,"cn":"怪异的","en":"weird","pos":""},{"id":27,"cn":"回报","en":"reward","pos":""},{"id":28,"cn":"奖励","en":"award","pos":""},{"id":29,"cn":"储存","en":"storage","pos":"n"},{"id":30,"cn":"稀有","en":"rarity","pos":"n"},{"id":31,"cn":"董事会","en":"board","pos":""},{"id":32,"cn":"珍贵的","en":"Precisely","pos":""},{"id":33,"cn":"人类","en":"Human being","pos":""},{"id":34,"cn":"刷","en":"Swipe","pos":""},{"id":35,"cn":"松树","en":"pine tree","pos":""},{"id":36,"cn":"建筑工地","en":"construction site","pos":""},{"id":37,"cn":"浪漫化","en":"romanticize","pos":""},{"id":38,"cn":"戏剧化","en":"dramatize","pos":""},{"id":39,"cn":"不同程度上","en":"to different extents","pos":""},{"id":40,"cn":"洞庭湖西岸","en":"the western shore of Dongting lake","pos":""},{"id":41,"cn":"成语","en":"Chinese idiom","pos":""},{"id":42,"cn":"园林","en":"Chinese garden","pos":""},{"id":43,"cn":"黄土高原","en":"The Loess Plateau","pos":""},{"id":44,"cn":"盆地","en":"basin","pos":""},{"id":45,"cn":"乡村振兴战略","en":"Rural revitalization strategy","pos":""},{"id":46,"cn":"值得的","en":"worthwhile","pos":""},{"id":47,"cn":"尸体","en":"dead body","pos":""},{"id":48,"cn":"爱国的","en":"patriotic","pos":""},{"id":49,"cn":"严酷的","en":"severe","pos":""},{"id":50,"cn":"淡水湖","en":"fresh water lake","pos":""},{"id":51,"cn":"续航能力","en":"battery capacity","pos":""},{"id":52,"cn":"客运能力","en":"passenger capacity","pos":""},{"id":53,"cn":"濒危物种","en":"endangered species","pos":""},{"id":54,"cn":"可持续发展","en":"sustainable development","pos":""},{"id":55,"cn":"草地覆盖率","en":"grass coverage rate","pos":""},{"id":56,"cn":"数学很重要","en":"math is of great consequence","pos":""},{"id":57,"cn":"中外建筑师长期合作的结果","en":"the result of long-term cooperation between foreign and Chinese architects","pos":""},{"id":58,"cn":"合作","en":"cooperation","pos":""},{"id":59,"cn":"建筑师","en":"architect","pos":""},{"id":60,"cn":"令人烦躁的","en":"annoying","pos":""},{"id":61,"cn":"垃圾桶","en":"bin","pos":""},{"id":62,"cn":"电影脚本","en":"movie script","pos":""},{"id":63,"cn":"打扰","en":"bother","pos":"v"},{"id":64,"cn":"守旧的","en":"old-school","pos":""},{"id":65,"cn":"使受伤（战斗中）","en":"wound","pos":""},{"id":66,"cn":"士兵在战斗中负伤","en":"The soldier was wounded in the battle","pos":""},{"id":67,"cn":"在二十一世纪上半叶","en":"at the first half of 21st century","pos":""},{"id":68,"cn":"强烈（竞争激烈，野兽凶猛）","en":"fierce","pos":""},{"id":69,"cn":"他恶狠狠的瞪了我一眼","en":"He gave me a fierce look","pos":""},{"id":70,"cn":"强烈的","en":"intense","pos":""},{"id":71,"cn":"暴力的","en":"violent","pos":""},{"id":72,"cn":"...种类繁多","en":"There are a large variety of","pos":""},{"id":73,"cn":"精美的","en":"delicate","pos":""},{"id":74,"cn":"扇子曾是中国女人的最爱","en":"Fans used to be a favorite item of Chinese women","pos":""},{"id":75,"cn":"上海的女子几乎人手一把扇子","en":"almost each women of Shanghai has a fan in their hand","pos":""},{"id":76,"cn":"扇子或许是女人用来表现优雅的最好道具","en":"Fans are probably the most appropriate expression of women’s elegance","pos":""},{"id":77,"cn":"由。。。组成","en":"consist of","pos":""},{"id":78,"cn":"自然景色","en":"Natural scenery","pos":""},{"id":79,"cn":"旅游业","en":"tourism","pos":""},{"id":80,"cn":"中秋节","en":"Mid-Autumn Festival","pos":""},{"id":81,"cn":"元宵节","en":"Lantern Festival","pos":""},{"id":82,"cn":"奇异的","en":"exotic","pos":""},{"id":83,"cn":"流动","en":"flow","pos":""},{"id":84,"cn":"肌肉","en":"muscle","pos":""},{"id":85,"cn":"美食的，美食家","en":"gourmet","pos":""},{"id":86,"cn":"大概的，近似的","en":"approximate","pos":""},{"id":87,"cn":"超过V","en":"exceed","pos":""},{"id":88,"cn":"转移,转化","en":"shift","pos":""},{"id":89,"cn":"过滤，过滤器","en":"filter","pos":""},{"id":90,"cn":"隐私","en":"privacy","pos":""},{"id":91,"cn":"神经的","en":"neural","pos":""},{"id":92,"cn":"神经元","en":"neuron","pos":""},{"id":93,"cn":"主食","en":"staple","pos":""},{"id":94,"cn":"邮票","en":"stamp","pos":""},{"id":95,"cn":"加工食物","en":"processed food","pos":""},{"id":96,"cn":"完全没有，缺乏的","en":"be devoid of sth","pos":""},{"id":97,"cn":"运用，施加","en":"exert","pos":"v"},{"id":98,"cn":"适中的，不太多的","en":"modest","pos":""},{"id":99,"cn":"总称","en":"generic name","pos":""},{"id":100,"cn":"承担","en":"undertake","pos":""},{"id":101,"cn":"倡议，主动性","en":"initiative","pos":""},{"id":102,"cn":"家具","en":"furniture","pos":""},{"id":103,"cn":"致命的","en":"fatal","pos":""},{"id":104,"cn":"山崩","en":"landslide","pos":""},{"id":105,"cn":"得罪，冒犯V","en":"offend","pos":""},{"id":106,"cn":"防御","en":"defend","pos":""},{"id":107,"cn":"框架","en":"framework","pos":""},{"id":108,"cn":"高贵的高尚的","en":"noble","pos":""},{"id":109,"cn":"秘书","en":"secretary","pos":""},{"id":110,"cn":"保持一切井井有条","en":"keep everything in good order","pos":""},{"id":111,"cn":"脚踝","en":"ankle","pos":""},{"id":112,"cn":"腰","en":"waist","pos":""},{"id":113,"cn":"按数字顺序","en":"in numerical order","pos":""},{"id":114,"cn":"机密的","en":"confidential","pos":""},{"id":115,"cn":"认为，=regard/consider","en":"deem","pos":""},{"id":116,"cn":"规章制度","en":"regulation","pos":""},{"id":117,"cn":"占支配地位的","en":"dominant","pos":""},{"id":118,"cn":"条件，情况","en":"circumstance","pos":""},{"id":119,"cn":"衰退","en":"recession","pos":"n"},{"id":120,"cn":"管理的","en":"regulatory","pos":""},{"id":121,"cn":"利润","en":"profit","pos":""},{"id":122,"cn":"政权","en":"regime","pos":"n"},{"id":123,"cn":"损失","en":"losses","pos":"n"},{"id":124,"cn":"抹去","en":"erase","pos":""},{"id":125,"cn":"破产的","en":"bankrupt","pos":""},{"id":126,"cn":"泄漏","en":"leak","pos":""},{"id":127,"cn":"货物","en":"cargo","pos":""},{"id":128,"cn":"市长（英格兰地区使用）","en":"mayor","pos":""},{"id":129,"cn":"冰箱","en":"refrigerator","pos":""},{"id":130,"cn":"打折","en":"discount","pos":""},{"id":131,"cn":"陡峭的","en":"steep","pos":""},{"id":132,"cn":"股票","en":"stock","pos":""},{"id":133,"cn":"现实主义","en":"realism","pos":""},{"id":134,"cn":"交通拥堵","en":"traffic congestion","pos":""},{"id":135,"cn":"目标","en":"objective","pos":"n"},{"id":136,"cn":"仓库","en":"warehouse","pos":""},{"id":137,"cn":"丢弃","en":"discard","pos":""},{"id":138,"cn":"暂停，终止","en":"suspend","pos":""},{"id":139,"cn":"宗教的","en":"religious","pos":""},{"id":140,"cn":"烟花","en":"firework","pos":""},{"id":141,"cn":"手续","en":"procedure","pos":""},{"id":142,"cn":"把握，抓紧","en":"grasp","pos":""},{"id":143,"cn":"教练教官","en":"instructor","pos":""},{"id":144,"cn":"概念","en":"concept","pos":""},{"id":145,"cn":"掉队","en":"lag","pos":""},{"id":146,"cn":"物理学","en":"physics","pos":""},{"id":147,"cn":"故意的","en":"deliberate","pos":""},{"id":148,"cn":"使迷惑","en":"puzzle","pos":""},{"id":149,"cn":"苦思冥想","en":"puzzle out","pos":""},{"id":150,"cn":"讲座","en":"lecture","pos":""},{"id":151,"cn":"采矿，采矿业","en":"mining","pos":""},{"id":152,"cn":"逮捕","en":"arrest","pos":""},{"id":153,"cn":"埋葬","en":"bury","pos":""},{"id":154,"cn":"炉子","en":"stove","pos":""},{"id":155,"cn":"基础设施","en":"infrastructure","pos":""},{"id":156,"cn":"短语","en":"phrase","pos":""},{"id":157,"cn":"十分震惊的","en":"astonished","pos":""},{"id":158,"cn":"分界线，边界","en":"boundary","pos":""},{"id":159,"cn":"监狱","en":"prison","pos":""},{"id":160,"cn":"隔离V.","en":"isolate","pos":""},{"id":161,"cn":"判决，宣判V.","en":"sentence","pos":""},{"id":162,"cn":"把...分类","en":"classify","pos":""},{"id":163,"cn":"履行V","en":"fulfill","pos":""},{"id":164,"cn":"注册","en":"enroll","pos":"v"},{"id":165,"cn":"有资格去做","en":"qualify","pos":"v"},{"id":166,"cn":"充足的","en":"sufficient","pos":""},{"id":167,"cn":"授予V","en":"grant","pos":""},{"id":168,"cn":"使处于不利地位","en":"disadvantage","pos":""},{"id":169,"cn":"存款","en":"deposit","pos":""},{"id":170,"cn":"押金","en":"security deposit","pos":""},{"id":171,"cn":"矿物质","en":"mineral","pos":""},{"id":172,"cn":"大量消耗","en":"deplete","pos":""},{"id":173,"cn":"真空的","en":"vacuum","pos":""},{"id":174,"cn":"显示，表明","en":"manifest","pos":""},{"id":175,"cn":"含义","en":"implication","pos":""},{"id":176,"cn":"版本","en":"version","pos":""},{"id":177,"cn":"违约","en":"default","pos":""},{"id":178,"cn":"专利","en":"patent","pos":""},{"id":179,"cn":"完整性","en":"integrity","pos":""},{"id":180,"cn":"逐渐削弱（慢慢侵蚀）","en":"undermine","pos":""},{"id":181,"cn":"规范，准则","en":"norm","pos":"n"},{"id":182,"cn":"抑制","en":"inhibit","pos":"v"},{"id":183,"cn":"放弃，错过（机会）","en":"pass up","pos":""},{"id":184,"cn":"对...失去理智","en":"get carried away with sth","pos":""},{"id":185,"cn":"刺激，激励","en":"incentive","pos":"n"},{"id":186,"cn":"在....范围内","en":"within","pos":""},{"id":187,"cn":"重新开始，恢复","en":"resume","pos":""},{"id":188,"cn":"候选人","en":"candidate","pos":""},{"id":189,"cn":"有说服力的","en":"persuasive","pos":""},{"id":190,"cn":"魅力","en":"charm","pos":""},{"id":191,"cn":"大量","en":"array","pos":"n"},{"id":192,"cn":"申请人","en":"applicant","pos":""},{"id":193,"cn":"溺爱","en":"spoil","pos":""},{"id":194,"cn":"辞职","en":"resign","pos":""},{"id":195,"cn":"揭露","en":"uncover","pos":""},{"id":196,"cn":"招募","en":"recruit","pos":""},{"id":197,"cn":"生效","en":"come into effect","pos":""},{"id":198,"cn":"运输","en":"shipment","pos":"n"},{"id":199,"cn":"裁判","en":"referee","pos":"n"},{"id":200,"cn":"空的，中空的","en":"hollow","pos":""},{"id":201,"cn":"蚊子","en":"mosquito","pos":""},{"id":202,"cn":"野兽","en":"beast","pos":""},{"id":203,"cn":"领先，在前面","en":"ahead","pos":""},{"id":204,"cn":"队列","en":"queue","pos":""},{"id":205,"cn":"耐用的，持久的","en":"durable","pos":""},{"id":206,"cn":"精密的，复杂的（机器）","en":"sophisticate","pos":""},{"id":207,"cn":"冗长乏味的","en":"tedious","pos":""},{"id":208,"cn":"投资","en":"investment","pos":"n"},{"id":209,"cn":"出台","en":"implement","pos":"v"},{"id":210,"cn":"稳步地，平稳地","en":"steadily","pos":""},{"id":211,"cn":"重视","en":"attach importance to","pos":"v"},{"id":212,"cn":"易于...的，有...倾向的","en":"be prone to","pos":""},{"id":213,"cn":"大量的，许多的","en":"a host of","pos":""},{"id":214,"cn":"令人讨厌的，糟糕的","en":"nasty","pos":""},{"id":215,"cn":"倾向于做某事","en":"be inclined to","pos":""},{"id":216,"cn":"英雄的，英勇的","en":"heroic","pos":""},{"id":217,"cn":"缄默的，沉默的，哑的","en":"mute","pos":""},{"id":218,"cn":"无法被言语形容的","en":"unspeakably","pos":""},{"id":219,"cn":"毛毛虫","en":"caterpillar","pos":""},{"id":220,"cn":"勉强的，不情愿的","en":"grudgingly","pos":""},{"id":221,"cn":"内向的人","en":"introvert","pos":""},{"id":222,"cn":"外向的人","en":"extrovert","pos":""},{"id":223,"cn":"无礼的，冒犯的","en":"offensive","pos":""},{"id":224,"cn":"次的，较差的","en":"inferior","pos":""},{"id":225,"cn":"竞争对手","en":"rival","pos":""},{"id":226,"cn":"可观的","en":"considerable","pos":""},{"id":227,"cn":"深深的根植于","en":"be deeply rooted","pos":""},{"id":228,"cn":"促进","en":"promote/boost","pos":""},{"id":229,"cn":"生态环境","en":"ecological environment","pos":""},{"id":230,"cn":"珍贵的","en":"precious","pos":""},{"id":231,"cn":"年轻人","en":"youngster","pos":""},{"id":232,"cn":"地道的当地特色小吃","en":"authentic local distinctive snack","pos":""},{"id":233,"cn":"近海的，沿海的","en":"coastal","pos":""},{"id":234,"cn":"虾，小虾","en":"shrimp","pos":""},{"id":235,"cn":"边界，边境","en":"border","pos":""},{"id":236,"cn":"预测","en":"forecast","pos":"v"},{"id":237,"cn":"重要性","en":"magnitude","pos":""},{"id":238,"cn":"社会学家","en":"sociologist","pos":""},{"id":239,"cn":"一块土地","en":"a plot of land","pos":""},{"id":240,"cn":"紧张的，使紧张","en":"tense","pos":""},{"id":241,"cn":"伸展，拉长","en":"stretch","pos":""},{"id":242,"cn":"显著的，杰出的","en":"prominent","pos":""},{"id":243,"cn":"包含，由...组成","en":"comprise","pos":""},{"id":244,"cn":"烹饪的","en":"culinary","pos":""},{"id":245,"cn":"蜗牛","en":"snail","pos":""},{"id":246,"cn":"一份（食物）","en":"serving","pos":""},{"id":247,"cn":"腐烂的","en":"rotten","pos":""},{"id":248,"cn":"质地粗糙的","en":"rough-textured","pos":""},{"id":249,"cn":"以什么为导向的","en":"oriented","pos":""},{"id":250,"cn":"目标导向的","en":"goal-oriented","pos":""},{"id":251,"cn":"断言，证实","en":"affirm","pos":""},{"id":252,"cn":"重申承诺","en":"affirm one’s commitment","pos":""},{"id":253,"cn":"复杂精细的","en":"intricately","pos":""},{"id":254,"cn":"白话文，散文","en":"prose","pos":""},{"id":255,"cn":"白话文写作","en":"prose writing","pos":""},{"id":256,"cn":"流畅","en":"fluency","pos":"n"},{"id":257,"cn":"精通使用英语","en":"be fluent in English","pos":""},{"id":258,"cn":"使沉浸，浸入","en":"immerse oneself in sth./be immersed in sth","pos":""},{"id":259,"cn":"耐力，持久力","en":"endurance","pos":""},{"id":260,"cn":"耐力运动","en":"endurance sport","pos":""},{"id":261,"cn":"根本上地","en":"fundamentally","pos":""},{"id":262,"cn":"极其重要的（从根本上重要的）","en":"fundamentally important","pos":""},{"id":263,"cn":"断断续续的，结结巴巴的","en":"halting","pos":""},{"id":264,"cn":"结结巴巴的演讲","en":"halting speech","pos":""},{"id":265,"cn":"媒介","en":"intermediary","pos":""},{"id":266,"cn":"内在的，固有的","en":"inherent in sth","pos":""},{"id":267,"cn":"指定","en":"specify","pos":"v"},{"id":268,"cn":"石头板","en":"stone plate","pos":""},{"id":269,"cn":"手工艺术人","en":"craftsman","pos":""},{"id":270,"cn":"图案，模式","en":"pattern","pos":""},{"id":271,"cn":"人物","en":"figure","pos":""},{"id":272,"cn":"在现场，当场","en":"on the spot","pos":""},{"id":273,"cn":"在...之中深受欢迎","en":"deeply popular among","pos":""},{"id":274,"cn":"大众","en":"public","pos":""},{"id":275,"cn":"讲授，教导，指导","en":"instruction","pos":"n"},{"id":276,"cn":"陈述，说明","en":"state","pos":"v"},{"id":277,"cn":"有道理，说的通","en":"make sense","pos":""},{"id":278,"cn":"与此同时","en":"meanwhile","pos":""},{"id":279,"cn":"面对","en":"confront","pos":"v"},{"id":280,"cn":"热心的，热情的，积极的","en":"zealous","pos":""},{"id":281,"cn":"费用，代价","en":"expense","pos":""},{"id":282,"cn":"劝告","en":"counsel","pos":"v"},{"id":283,"cn":"顾问","en":"counselor","pos":""},{"id":284,"cn":"建议某人做某事","en":"counsel sb. to do sth","pos":""},{"id":285,"cn":"使震惊","en":"stun","pos":"v"},{"id":286,"cn":"被某事震惊","en":"be stunned by sth","pos":""},{"id":287,"cn":"令人信服的，有说服力的","en":"compelling","pos":""},{"id":288,"cn":"确凿有力的证据","en":"compelling evidence","pos":""},{"id":289,"cn":"满足感","en":"fulfillment","pos":""},{"id":290,"cn":"使（不好的事物）持续下去","en":"perpetuate","pos":""},{"id":291,"cn":"广泛的","en":"broad","pos":""},{"id":292,"cn":"使平等","en":"level","pos":""},{"id":293,"cn":"竞技舞台","en":"playing field","pos":""},{"id":294,"cn":"候选人（尤其指有抱负的）","en":"aspirant","pos":""},{"id":295,"cn":"卓越的，杰出的","en":"exceptional","pos":""},{"id":296,"cn":"全套技能","en":"repertoire","pos":""},{"id":297,"cn":"...的基石","en":"the corner stone of","pos":""},{"id":298,"cn":"进化","en":"evolution","pos":""},{"id":299,"cn":"进化的","en":"evolutionary","pos":""},{"id":300,"cn":"子女，后代","en":"offspring","pos":""},{"id":301,"cn":"假设，假说","en":"hypothesis","pos":""},{"id":302,"cn":"灵长类物种","en":"primate-species","pos":""},{"id":303,"cn":"厨师","en":"chef","pos":""},{"id":304,"cn":"谋杀，谋杀案","en":"murder","pos":""},{"id":305,"cn":"谋杀案","en":"a murder case","pos":""},{"id":306,"cn":"使困惑","en":"baffle","pos":""},{"id":307,"cn":"适度的","en":"moderate","pos":""},{"id":308,"cn":"大胆提出","en":"venture","pos":""},{"id":309,"cn":"V.融化","en":"melt","pos":""},{"id":310,"cn":"美味佳肴","en":"delicacy","pos":""},{"id":311,"cn":"赞助V","en":"sponsor","pos":""},{"id":312,"cn":"进入权","en":"admission","pos":"n"},{"id":313,"cn":"赞助一项活动","en":"sponsor an event","pos":""},{"id":314,"cn":"慌乱的","en":"frantic","pos":""},{"id":315,"cn":"慌乱的寻找","en":"frantic search","pos":""},{"id":316,"cn":"不可避免的","en":"inevitable","pos":""},{"id":317,"cn":"必然结果","en":"inevitable result","pos":""},{"id":318,"cn":"恐惧","en":"horror","pos":"n"},{"id":319,"cn":"恐惧地","en":"in horror","pos":""},{"id":320,"cn":"至关重要的","en":"crucial","pos":""},{"id":321,"cn":"悖论","en":"paradox","pos":"n"},{"id":322,"cn":"透露","en":"disclose","pos":"v"},{"id":323,"cn":"奢华的","en":"lavish","pos":""},{"id":324,"cn":"把...慷慨倾注于","en":"lavish sth. on","pos":""},{"id":325,"cn":"空的","en":"vacant","pos":""},{"id":326,"cn":"职务空缺","en":"job vacancy","pos":""},{"id":327,"cn":"离职率","en":"turnover","pos":""},{"id":328,"cn":"门槛","en":"threshold","pos":""},{"id":329,"cn":"延长","en":"prolong","pos":"v"},{"id":330,"cn":"抑制","en":"curb","pos":"v"},{"id":331,"cn":"毁坏","en":"ruin","pos":"v"},{"id":332,"cn":"香料","en":"spice","pos":"n"},{"id":333,"cn":"瓷器","en":"china","pos":""},{"id":334,"cn":"宝石","en":"gem","pos":""},{"id":335,"cn":"见证，目睹","en":"witness","pos":"n"},{"id":336,"cn":"第一人称视角","en":"first-person point of view","pos":""},{"id":337,"cn":"前景","en":"prospect","pos":""},{"id":338,"cn":"相互抵消","en":"cancel out","pos":""},{"id":339,"cn":"预期","en":"anticipate","pos":"v"},{"id":340,"cn":"使。。。能够","en":"enable","pos":""},{"id":341,"cn":"普及","en":"popularize","pos":"v"},{"id":342,"cn":"老人","en":"seniors","pos":"n"},{"id":343,"cn":"品种","en":"variety","pos":"n"},{"id":344,"cn":"普及","en":"popularization","pos":"n"},{"id":345,"cn":"浏览","en":"browse","pos":"v"},{"id":346,"cn":"越来越多的","en":"an increasing number of","pos":""},{"id":347,"cn":"齐全的","en":"complete","pos":"adj"},{"id":348,"cn":"资金安全","en":"financial security","pos":""},{"id":349,"cn":"就...而言","en":"as far as sb./sth. is concerned","pos":""},{"id":350,"cn":"洋葱","en":"onion","pos":"n"},{"id":351,"cn":"确实","en":"indeed","pos":"adv"},{"id":352,"cn":"骨折，使断裂","en":"fracture","pos":""},{"id":353,"cn":"片刻地","en":"momentarily","pos":""},{"id":354,"cn":"手工的","en":"manual","pos":""},{"id":355,"cn":"复制品","en":"duplicate","pos":""},{"id":356,"cn":"传记","en":"biography","pos":""},{"id":357,"cn":"几乎","en":"virtually","pos":"adv"},{"id":358,"cn":"生态学家","en":"ecologist","pos":""},{"id":359,"cn":"节约，保护","en":"conserve","pos":""},{"id":360,"cn":"生物多样性","en":"biodiversity","pos":""},{"id":361,"cn":"差别","en":"distinction","pos":"n"},{"id":362,"cn":"直白地","en":"explicitly","pos":""},{"id":363,"cn":"使分心","en":"distract","pos":""},{"id":364,"cn":"干扰，使人分心的东西","en":"distraction","pos":""},{"id":365,"cn":"倾向，意愿","en":"inclination","pos":"n"},{"id":366,"cn":"随心所欲","en":"follow one’s own inclination","pos":""},{"id":367,"cn":"更好的","en":"superior","pos":""},{"id":368,"cn":"虚拟的","en":"virtual","pos":""},{"id":369,"cn":"视觉的","en":"visual","pos":""},{"id":370,"cn":"极其地","en":"exceedingly","pos":"adv"},{"id":371,"cn":"随机的","en":"random","pos":""},{"id":372,"cn":"高原","en":"Plateau","pos":""}];
+const ROUND = 20;
+const LS_SRS = 'vocab_srs_v1', LS_DAY = 'vocab_day_v1';
+
+/* ---------- storage ---------- */
+function loadSrs(){ try{ return JSON.parse(localStorage.getItem(LS_SRS)) || {} }catch(e){ return {} } }
+function saveSrs(o){ try{ localStorage.setItem(LS_SRS, JSON.stringify(o)) }catch(e){} }
+function loadDay(){
+  const t = new Date().toDateString();
+  let d; try{ d = JSON.parse(localStorage.getItem(LS_DAY)) }catch(e){}
+  if(!d || d.d !== t) d = {d:t, n:0, ok:0};
+  return d;
+}
+function saveDay(d){ try{ localStorage.setItem(LS_DAY, JSON.stringify(d)) }catch(e){} }
+
+let srs = loadSrs();
+let day = loadDay();
+
+const box = w => { const r = srs[w.id]; if(!r) return 0; return r.box|0; };
+const isWrong = w => { const r = srs[w.id]; return r && r.box < 0; };
+
+function record(w, ok){
+  const r = srs[w.id] || {box:0, ok:0, bad:0, last:0};
+  r.last = Date.now();
+  if(ok){ r.ok++; r.box = Math.min(3, (r.box<0?0:r.box) + 1); }
+  else { r.bad++; r.box = -1; }
+  srs[w.id] = r;
+  saveSrs(srs);
+  day.n++; if(ok) day.ok++;
+  saveDay(day);
+}
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const norm = s => s.toLowerCase().replace(/[’']/g,"'").replace(/[.,;:!?！，。；：]/g,'').replace(/\s+/g,' ').trim();
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a }
+function pick(arr,n){ return shuffle(arr.slice()).slice(0,n) }
+
+function refreshHome(){
+  const total = WORDS.length;
+  const mastered = WORDS.filter(w=>box(w)>=3).length;
+  const wrong = WORDS.filter(isWrong).length;
+  $('#sTotal').textContent = total;
+  $('#sMastered').textContent = mastered;
+  $('#sWrong').textContent = wrong;
+  $('#wrongSub').textContent = wrong ? `复习 ${wrong} 个做错过的词` : '暂时没有错题，太强了';
+  const before = Math.floor(day.n / 30 * 100);
+  $('#todayDone').textContent = day.n;
+  $('#todayAcc').textContent = day.n ? Math.round(day.ok/day.n*100) + '%' : '—';
+  $('#todayBar').style.width = Math.min(100, before) + '%';
+}
+
+/* ---------- quiz ---------- */
+let Q = null; // {list, i, mode, ok, bad, wrongs}
+
+function pickWords(mode, n){
+  if(mode === 'wrong'){
+    const pool = WORDS.filter(isWrong);
+    if(!pool.length) return null;
+    return shuffle(pool).slice(0, Math.min(n, pool.length));
+  }
+  // weight: unmastered first, wrong ones a bit higher
+  const scored = WORDS.map(w=>{
+    const r = srs[w.id];
+    let s = Math.random();
+    if(!r) s += 1.2;
+    else if(r.box < 0) s += 1.6;
+    else s += (3 - Math.min(3,r.box)) * 0.6;
+    return [s, w];
+  }).sort((a,b)=>b[0]-a[0]);
+  return scored.slice(0, n).map(x=>x[1]);
+}
+
+function startQuiz(mode){
+  const n = mode === 'wrong' ? 30 : ROUND;
+  const list = pickWords(mode, n);
+  if(!list){ alert('还没有错题，先去练几轮吧～'); return }
+  Q = {list, i:0, mode, ok:0, bad:0, wrongs:[]};
+  show('quiz');
+  renderQ();
+}
+
+function questionType(mode, w){
+  if(mode === 'mix') return ['cn2en','en2cn','spell'][Math.floor(Math.random()*3)];
+  return mode;
+}
+
+function renderQ(){
+  const w = Q.list[Q.i];
+  const type = questionType(Q.mode, w);
+  Q.cur = {type, w};
+  $('#qBar').style.width = (Q.i / Q.list.length * 100) + '%';
+  $('#qCount').textContent = `${Q.i+1}/${Q.list.length}`;
+  $('#qFb').className = 'feedback';
+  $('#qNextRow').classList.add('hidden');
+  $('#qSpeakWrap').innerHTML = '';
+  $('#qInput').value = '';
+  $('#qInput').className = 'type';
+  $('#qInput').disabled = false;
+
+  const opts = $('#qOpts');
+  opts.innerHTML = '';
+  $('#qTyping').classList.add('hidden');
+
+  if(type === 'cn2en'){
+    $('#qLabel').textContent = '选择英文' + (w.pos? ' · '+w.pos : '');
+    $('#qText').textContent = w.cn;
+    $('#qText').className = 'qtext';
+    $('#qHint').textContent = '';
+    buildOptions(w, w.en, x=>x.en);
+    opts.classList.remove('hidden');
+  } else if(type === 'en2cn'){
+    $('#qLabel').textContent = '选择含义';
+    $('#qText').textContent = w.en;
+    $('#qText').className = 'qtext en';
+    $('#qHint').textContent = '';
+    buildOptions(w, w.cn, x=>x.cn);
+    opts.classList.remove('hidden');
+    speakBtn(w.en);
+  } else {
+    $('#qLabel').textContent = '拼写' + (w.pos? ' · '+w.pos : '');
+    $('#qText').textContent = w.cn;
+    $('#qText').className = 'qtext';
+    $('#qHint').textContent = '';
+    opts.classList.add('hidden');
+    $('#qTyping').classList.remove('hidden');
+    setTimeout(()=>$('#qInput').focus(), 120);
+  }
+}
+
+function speakBtn(text){
+  $('#qSpeakWrap').innerHTML = `<button class="speak" id="btnSpeak">🔊</button>`;
+  $('#btnSpeak').onclick = ()=>speak(text);
+}
+function speak(text){
+  try{
+    if(!window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = .9;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+function buildOptions(w, correct, get){
+  const opts = $('#qOpts');
+  const pool = WORDS.filter(x=>x.id!==w.id);
+  // prefer same-ish length options for plausible distractors
+  const sorted = pool.sort((a,b)=>Math.abs(get(a).length-correct.length)-Math.abs(get(b).length-correct.length));
+  const near = sorted.slice(0, 60);
+  const distract = [];
+  const used = new Set([correct]);
+  for(const x of pick(near, 30)){
+    const v = get(x);
+    if(!v || used.has(v)) continue;
+    used.add(v); distract.push(v);
+    if(distract.length===3) break;
+  }
+  const all = shuffle([correct, ...distract]);
+  all.forEach((v,idx)=>{
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = `<span>${v}</span><span class="k">${idx+1}</span>`;
+    b.onclick = ()=>answerChoice(b, v, correct, w);
+    opts.appendChild(b);
+  });
+}
+
+function answerChoice(el, v, correct, w){
+  const opts = [...$('#qOpts').children];
+  if(opts.some(o=>o.disabled)) return;
+  const ok = norm(v) === norm(correct);
+  opts.forEach(o=>{
+    o.disabled = true;
+    const t = o.querySelector('span').textContent;
+    if(norm(t) === norm(correct)) o.classList.add('ok');
+    else if(o === el) o.classList.add('bad');
+    else o.classList.add('dim');
+  });
+  afterAnswer(ok, w);
+}
+
+function afterAnswer(ok, w){
+  record(w, ok);
+  if(ok) Q.ok++; else { Q.bad++; Q.wrongs.push(w); }
+  const fb = $('#qFb');
+  fb.className = 'feedback show ' + (ok ? 'good':'wrong');
+  fb.innerHTML = ok
+    ? `<b>✓ 正确</b>${w.cn} — ${w.en}`
+    : `<b>✕ 再记一次</b>${w.cn} — <b>${w.en}</b>`;
+  if(!ok) speak(w.en);
+  $('#qNextRow').classList.remove('hidden');
+  $('#btnSkip').classList.add('hidden');
+}
+
+function nextQ(){
+  Q.i++;
+  $('#btnSkip').classList.remove('hidden');
+  if(Q.i >= Q.list.length) finish(); else renderQ();
+}
+
+function finish(){
+  const total = Q.ok + Q.bad;
+  $('#dOk').textContent = Q.ok;
+  $('#dBad').textContent = Q.bad;
+  $('#dAcc').textContent = total ? Math.round(Q.ok/total*100)+'%' : '0%';
+  $('#doneEmoji').textContent = Q.bad === 0 ? '🏆' : (Q.ok >= Q.bad ? '💪' : '📚');
+  $('#doneTitle').textContent = Q.bad === 0 ? '全对，稳！' : '这一轮完成';
+  $('#doneText').textContent = Q.bad === 0
+    ? `这 ${total} 个词你已经很熟了，继续保持。`
+    : `做错 ${Q.bad} 个，已经收进错题本，晚点再过一遍。`;
+  const wl = Q.wrongs.length
+    ? '<h2 style="margin-top:6px">本轮错题</h2>' + Q.wrongs.map(w=>
+        `<div class="wrow"><span class="cn">${w.cn}</span><span class="en">${w.en}</span></div>`).join('')
+    : '';
+  $('#dWrongList').innerHTML = wl;
+  refreshHome();
+  show('done');
+}
+
+/* ---------- events ---------- */
+$('#btnSubmit').onclick = ()=>{
+  const w = Q.cur.w;
+  const val = $('#qInput').value;
+  if(!val.trim()) return;
+  const ok = norm(val) === norm(w.en);
+  $('#qInput').disabled = true;
+  $('#qInput').className = 'type ' + (ok ? 'ok':'bad');
+  afterAnswer(ok, w);
+};
+$('#qInput').addEventListener('keydown', e=>{ if(e.key === 'Enter'){ e.preventDefault(); $('#btnSubmit').click() } });
+$('#btnHint').onclick = ()=>{
+  const en = Q.cur.w.en;
+  const shown = en.split(' ').map((part,i)=> i===0 ? part.slice(0, Math.max(2, Math.ceil(part.length/3))) + '…' : '…').join(' ');
+  $('#qHint').textContent = shown + `（${en.replace(/[^A-Za-z]/g,'').length} 个字母）`;
+};
+$('#btnNext').onclick = nextQ;
+$('#btnSkip').onclick = ()=>{
+  const w = Q.cur.w;
+  record(w, false);
+  Q.bad++; Q.wrongs.push(w);
+  nextQ();
+};
+$('#btnQuit').onclick = ()=>{ if(confirm('结束这一轮？')) { finish(); } };
+$('#btnHome').onclick = ()=>show('home');
+$('#btnAgain').onclick = ()=>{ startQuiz(Q.mode) };
+document.querySelectorAll('[data-start]').forEach(b=>b.onclick = ()=>startQuiz(b.dataset.start));
+function setTheme(dark){
+  document.documentElement.classList.toggle('dark', dark);
+  document.querySelector('meta[name=theme-color]').setAttribute('content', dark ? '#111110' : '#f7f6f3');
+  try{ localStorage.setItem('vocab_theme', dark ? 'dark':'light') }catch(e){}
+}
+$('#btnTheme').onclick = ()=>setTheme(!document.documentElement.classList.contains('dark'));
+(function(){
+  let pref=null; try{ pref = localStorage.getItem('vocab_theme') }catch(e){}
+  if(pref) setTheme(pref==='dark');
+  else setTheme(!!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches));
+})();
+document.querySelectorAll('[data-nav]').forEach(b=>b.onclick = ()=>{
+  document.querySelectorAll('[data-nav]').forEach(x=>x.classList.toggle('on', x===b));
+  if(b.dataset.nav === 'list'){ show('list'); renderList(); } else show('home');
+});
+
+function show(v){
+  ['home','quiz','done','list'].forEach(k=>$('#v'+k[0].toUpperCase()+k.slice(1)).classList.toggle('hidden', k!==v));
+  window.scrollTo({top:0});
+  if(v==='home') refreshHome();
+}
+
+/* ---------- list ---------- */
+function renderList(){
+  const q = ($('#searchBox').value||'').trim().toLowerCase();
+  const rows = WORDS.filter(w=>!q || w.cn.toLowerCase().includes(q) || w.en.toLowerCase().includes(q));
+  $('#wordList').innerHTML = rows.map(w=>{
+    const b = box(w);
+    const cls = b<0 ? 'bad' : ('b'+Math.min(3,b));
+    return `<div class="wrow">
+      <span class="dot ${cls}"></span>
+      <span class="cn">${w.cn}${w.pos?`<span class="pill">${w.pos}</span>`:''}</span>
+      <span class="en">${w.en}</span>
+      <button class="speak" data-say="${w.en.replace(/"/g,'&quot;')}">🔊</button>
+    </div>`;
+  }).join('') || '<p class="sub center">没找到</p>';
+  document.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>speak(b.dataset.say));
+}
+$('#searchBox').addEventListener('input', ()=>{ if(WORDS.length<400) renderList(); });
+
+refreshHome();
+</script>
+
+<script>
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
