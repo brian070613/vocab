@@ -315,7 +315,10 @@ function startQuiz(mode){
 }
 
 function questionType(mode, it){
-  if(it.kind === 'cloze') return Math.random() < 0.5 ? 'cloze' : 'clozeC';
+  if(it.kind === 'cloze'){
+    if(mode === 'wrong') return Math.random() < 0.5 ? 'cloze' : 'clozeC';
+    return mode === 'clozeC' ? 'clozeC' : 'cloze';
+  }
   if(mode === 'mix' || mode === 'wrong') return ['cn2en','en2cn','spell'][Math.floor(Math.random()*3)];
   return mode;
 }
